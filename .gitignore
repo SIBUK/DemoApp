@@ -53,3 +53,5 @@ build/
 
 
 /.elasticbeanstalk/
+.elasticbeanstalk/
+
