@@ -20,12 +20,12 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: DemoAppTest
+  database: DemoApp
   username: postgres
   password: password
 
 production:
   <<: *default
-  database: DemoAppProducion
+  database: DemoApp
   username: postgres
   password: <%= ENV["DB_PASSWORD"] %>
