@@ -26,6 +26,6 @@ test:
 
 production:
   <<: *default
-  database: DemoApp
+  database: ebdb
   username: postgres
   password: <%= ENV["DB_PASSWORD"] %>
