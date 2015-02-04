@@ -4,15 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 # Use progreSQL as the database for Active Record
-
-group :production do
-  gem 'pg'
-end
-
-group :test, :development do
-  gem 'pg', '~> 0.18.0.pre20141117110243'
-end
-
+gem 'pg', '~> 0.18.0.pre20141117110243'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
