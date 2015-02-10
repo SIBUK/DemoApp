@@ -1,30 +1,50 @@
 class PostsController < ApplicationController
+  private
+  def post_params
+    params.require(:post).permit(:title, :body, :category_id)
+  end
+
+  public
+
   def index
-
-  end
-
-  def new
-    sdfs  = 0
-  end
-
-  def create
-
-  end
-
-  def edit
-
-  end
-
-  def update
-
+    @posts = Post.all
   end
 
   def show
+    @post = Post.find(params[:id])
+  end
 
+  def new
+    @post = Post.new
+    #@catergory = Catergory.all
+  end
+
+  def create
+    @post = Post.new(post_params)
+    if @post.save
+      redirect_to posts_path, :notice => "Your post has been saved"
+    else
+      render "new"
+    end
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update_attributes(post_params)
+      redirect_to posts_path, :notice => "Your post has been updated"
+    else
+      render "edit"
+    end
   end
 
   def destroy
-
+    @post = Post.find(params[:id])
+    @post.delete
+    redirect_to posts_path, :notice => "Your post was deleted"
   end
 
 end

@@ -1,3 +1,9 @@
 <h1>Blog Posts</h1>
-<h3>Smaple Post One</h3>
-<p>This is some sample test for our amazing Ruby blog.</p>
+
+<% @posts.each do |post| %>
+    <h3><%= link_to post.title, post %></h3>
+    <p><%= post.body %></p>
+    <hr>
+<% end %>
+
+<%= link_to "Create new post", new_post_path %>
