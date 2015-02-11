@@ -6,7 +6,7 @@ gem 'rails', '4.1.8'
 # Use progreSQL as the database for Active Record
 gem 'pg', '~> 0.18.0.pre20141117110243'
 # Active Admin
-gem 'devise'
+#gem 'devise'
 #gem 'activeadmin', github: 'activeadmin'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
