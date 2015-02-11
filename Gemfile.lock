@@ -170,7 +170,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   coffee-rails (~> 4.0.0)
-  devise (~> 3.2.4)
+  devise
   jbuilder (~> 2.0)
   jquery-rails
   pg (~> 0.18.0.pre20141117110243)
