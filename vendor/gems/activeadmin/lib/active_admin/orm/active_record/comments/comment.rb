@@ -14,9 +14,9 @@ module ActiveAdmin
 
     before_create :set_resource_type
 
-    # @returns [String] The name of the record to use for the polymorphic relationship
+    # @return [String] The name of the record to use for the polymorphic relationship
     def self.resource_type(resource)
-      ResourceController::Decorators.undecorate(resource).class.name.to_s
+      ResourceController::Decorators.undecorate(resource).class.base_class.name.to_s
     end
 
     # Postgres adapters won't compare strings to numbers (issue 34)
@@ -25,9 +25,11 @@ module ActiveAdmin
     end
 
     def self.find_for_resource_in_namespace(resource, namespace)
-      where resource_type: resource_type(resource),
-            resource_id:   resource_id_cast(resource),
-            namespace:     namespace.to_s
+      where(
+        resource_type: resource_type(resource),
+        resource_id:   resource_id_cast(resource),
+        namespace:     namespace.to_s
+      ).order('created_at ASC')
     end
 
     def self.resource_id_type

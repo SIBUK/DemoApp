@@ -47,6 +47,11 @@ end
 require 'capybara/rails'
 require 'capybara/cucumber'
 require 'capybara/session'
+require 'capybara/poltergeist'
+require 'phantomjs/poltergeist'
+
+Capybara.javascript_driver = :poltergeist
+
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd
 # prefer to use XPath just remove this line and adjust any selectors in your
@@ -130,4 +135,11 @@ end
 # Don't run @rails4 tagged features for versions before Rails 4.
 Before('@rails4') do |scenario|
   scenario.skip_invoke! if Rails::VERSION::MAJOR < 4
+end
+
+Around '@silent_unpermitted_params_failure' do |scenario, block|
+  original = ActionController::Parameters.action_on_unpermitted_parameters
+  ActionController::Parameters.action_on_unpermitted_parameters = false
+  block.call
+  ActionController::Parameters.action_on_unpermitted_parameters = original
 end

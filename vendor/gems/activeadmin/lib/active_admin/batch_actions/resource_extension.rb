@@ -40,7 +40,7 @@ module ActiveAdmin
 
       # Remove a batch action
       # @param [Symbol] sym
-      # @returns [ActiveAdmin::BatchAction] the batch action, if it was present
+      # @return [ActiveAdmin::BatchAction] the batch action, if it was present
       #
       def remove_batch_action(sym)
         @batch_actions.delete(sym.to_sym)
@@ -129,8 +129,7 @@ module ActiveAdmin
     end
 
     def inputs
-      HashWithIndifferentAccess.new \
-        @options[:form].is_a?(Proc) ? @options[:form].call : @options[:form]
+      @options[:form]
     end
 
     # Returns the display if block. If the block was not explicitly defined

@@ -7,13 +7,18 @@ a thin DSL on top of [Formtastic](https://github.com/justinfrench/formtastic):
 ActiveAdmin.register Post do
 
   form do |f|
-    f.inputs 'Details' do
-      f.input :title
-      f.input :published_at, label: "Publish Post At"
-      f.input :category
+    inputs 'Details' do
+      input :title
+      input :published_at, label: "Publish Post At"
+      li "Created at #{f.object.created_at}" unless f.object.new_record?
+      input :category
     end
-    f.inputs 'Content', :body
-    f.actions
+    panel 'Markup' do
+      "The following can be used in the content below..."
+    end
+    inputs 'Content', :body
+    para "Press cancel to return to the list without saving."
+    actions
   end
 
 end
@@ -35,7 +40,7 @@ end
 
 ## Partials
 
-If you require a more custom form than the DSL can provide, use a partial instead:
+If you want to split a custom form into a separate partial use:
 
 ```ruby
 ActiveAdmin.register Post do
@@ -45,20 +50,19 @@ end
 
 Which looks for something like this:
 
-```erb
-<%# app/views/admin/posts/_form.html.erb %>
-<%= semantic_form_for [:admin, @post] do |f| %>
-  <%= f.inputs :title, :body %>
-  <%= f.actions do %>
-    <%= f.action :submit %>
-    <li class="cancel"><%= link_to 'Cancel', collection_path %></li>
-  <% end %>
-<% end %>
+```ruby
+# app/views/admin/posts/_form.html.arb
+active_admin_form_for resource do |f|
+  inputs :title, :body
+  actions
+end
 ```
+
+This is a regular Rails partial so any template engine may be used.
 
 ## Nested Resources
 
-You can create forms with nested models using the `has_many` method:
+You can create forms with nested models using the `has_many` method, even if your model uses `has_one`:
 
 ```ruby
 ActiveAdmin.register Post do
@@ -75,7 +79,7 @@ ActiveAdmin.register Post do
       end
     end
     f.inputs do
-      f.has_many :taggings, sortable: :position do |t|
+      f.has_many :taggings, sortable: :position, sortable_start: 1 do |t|
         t.input :tag
       end
     end
@@ -102,6 +106,8 @@ If you pass a string, it will be used as the text for the new record button.
 The `:sortable` option adds a hidden field and will enable drag & drop sorting of the children. It 
 expects the name of the column that will store the index of each child.
 
+The `:sortable_start` option sets the value (0 by default) of the first position in the list.
+
 ## Datepicker
 
 ActiveAdmin offers the `datepicker` input, which uses the [jQuery UI datepicker](http://jqueryui.com/datepicker/).
@@ -126,3 +132,28 @@ end
 ```
 
 This is particularly useful to display errors on virtual or hidden attributes.
+
+# Tabs
+
+You can arrage content in tabs as shown below:
+
+```ruby
+  form do |f|
+    tabs do
+      tab 'Basic' do
+        f.inputs 'Basic Details' do
+          f.input :email
+          f.input :password
+          f.input :password_confirmation
+        end
+      end
+
+      tab 'Advanced' do
+        f.inputs 'Advanced Details' do
+          f.input :role
+        end
+      end
+    end
+    f.actions
+  end
+```

@@ -2,8 +2,6 @@ require 'rails_helper'
 
 describe ActiveAdmin::ResourceController do
 
-  before(:all) { load_defaults! }
-
   let(:controller) { ActiveAdmin::ResourceController.new }
 
   describe "authenticating the user" do
@@ -190,34 +188,34 @@ describe Admin::PostsController, type: "controller" do
 
   describe 'retreiving the resource collection' do
     let(:controller){ Admin::PostsController.new }
+    let(:config) { controller.class.active_admin_config }
     before do
       Post.create!(title: "An incledibly unique Post Title") if Post.count == 0
-      controller.class_eval { public :collection }
+      config.decorator_class_name = nil
+      request = double 'Request', format: 'application/json'
+      allow(controller).to receive(:params) { {} }
+      allow(controller).to receive(:request){ request }
     end
 
-    subject { controller.collection }
+    subject { controller.send :collection }
 
     it {
-      skip # doesn't pass when running whole spec suite (WTF)
-      is_expected.to be kind_of(ActiveRecord::Relation)
+      is_expected.to be_a ActiveRecord::Relation
     }
 
     it "returns a collection of posts" do
-      skip # doesn't pass when running whole spec suite (WTF)
       expect(subject.first).to be_kind_of(Post)
     end
 
     context 'with a decorator' do
-      let(:config) { controller.class.active_admin_config }
-      before { config.decorator_class_name = '::PostDecorator' }
+      before { config.decorator_class_name = 'PostDecorator' }
 
-      it 'returns a PostDecorator' do
-        skip # doesn't pass when running whole spec suite (WTF)
-        expect(subject).to be_kind_of(PostDecorator::DecoratedEnumerableProxy)
+      it 'returns a collection decorator using PostDecorator' do
+        expect(subject).to be_a Draper::CollectionDecorator
+        expect(subject.decorator_class).to eq PostDecorator
       end
 
-      it 'returns a PostDecorator that wraps the post' do
-        skip # doesn't pass when running whole spec suite (WTF)
+      it 'returns a collection decorator that wraps the post' do
         expect(subject.first.title).to eq Post.first.title
       end
     end
@@ -226,36 +224,42 @@ describe Admin::PostsController, type: "controller" do
 
   describe "performing batch_action" do
     let(:controller){ Admin::PostsController.new }
+    let(:batch_action) { ActiveAdmin::BatchAction.new :flag, "Flag", &batch_action_block }
+    let(:batch_action_block) { proc { } }
     before do
-      batch_action = ActiveAdmin::BatchAction.new :flag, "Flag" do
-        redirect_to collection_path
-      end
-
       allow(controller.class.active_admin_config).to receive(:batch_actions).and_return([batch_action])
     end
 
     describe "when params batch_action matches existing BatchAction" do
+      before do
+        allow(controller).to receive(:params) { { batch_action: "flag", collection_selection: ["1"] } }
+      end
+
       it "should call the block with args" do
-        skip # dont know how to check if the block was called
+        expect(controller).to receive(:instance_exec).with(["1"], {})
+        controller.batch_action
+      end
+
+      it "should call the block in controller scope" do
+        expect(controller).to receive(:render_in_context).with(controller, nil).and_return({})
+        controller.batch_action
       end
     end
 
     describe "when params batch_action doesn't match a BatchAction" do
       it "should raise an error" do
-        skip # doesn't pass when running whole spec suite (WTF)
-
+        allow(controller).to receive(:params) { { batch_action: "derp", collection_selection: ["1"] } }
         expect {
-          post(:batch_action, batch_action: "derp", collection_selection: ["1"])
+          controller.batch_action
         }.to raise_error("Couldn't find batch action \"derp\"")
       end
     end
 
     describe "when params batch_action is blank" do
       it "should raise an error" do
-        skip # doesn't pass when running whole spec suite (WTF)
-
+        allow(controller).to receive(:params) { { collection_selection: ["1"] } }
         expect {
-          post(:batch_action, collection_selection: ["1"])
+          controller.batch_action
         }.to raise_error("Couldn't find batch action \"\"")
       end
     end

@@ -1,4 +1,21 @@
 module ActiveAdmin
+  # Exception class to raise when there is an authorized access
+  # exception thrown. The exception has a few goodies that may
+  # be useful for capturing / recognizing security issues.
+  class AccessDenied < StandardError
+    attr_reader :user, :action, :subject
+
+    def initialize(user, action, subject)
+      @user, @action, @subject = user, action, subject
+
+      super()
+    end
+
+    def message
+      I18n.t("active_admin.access_denied.message")
+    end
+  end
+
   class Error < RuntimeError
   end
 
@@ -16,6 +33,7 @@ module ActiveAdmin
       super "Your file, #{file} (line #{line}), caused a database error while Active Admin was loading. This " +
             "is most common when your database is missing or doesn't have the latest migrations applied. To " +
             "prevent this error, move the code to a place where it will only be run when a page is rendered. " +
+            "One solution can be, to wrap the query in a Proc." +
             "Original error message: #{exception.message}"
     end
 
@@ -28,9 +46,14 @@ module ActiveAdmin
   private
 
     def self.database_error_classes
-      classes = []
-      classes << ActiveRecord::StatementInvalid if defined? ActiveRecord::StatementInvalid
-      classes
+      @classes ||= []
     end
   end
+
+  class DependencyError < ErrorLoading
+  end
+
+  class NoMenuError < KeyError
+  end
+
 end

@@ -18,13 +18,13 @@ module ActiveAdmin
     end
 
     def define_root_routes(router)
-      router.instance_exec @application.namespaces.values do |namespaces|
+      router.instance_exec @application.namespaces do |namespaces|
         namespaces.each do |namespace|
           if namespace.root?
-            root to: namespace.root_to
+            root namespace.root_to_options.merge(to: namespace.root_to)
           else
             namespace namespace.name do
-              root to: namespace.root_to
+              root namespace.root_to_options.merge(to: namespace.root_to)
             end
           end
         end
@@ -34,7 +34,7 @@ module ActiveAdmin
     # Defines the routes for each resource
     def define_resource_routes(router)
       router.instance_exec @application.namespaces, self do |namespaces, aa_router|
-        resources = namespaces.values.map{ |n| n.resources.values }.flatten
+        resources = namespaces.flat_map{ |n| n.resources.values }
         resources.each do |config|
           routes = aa_router.resource_routes(config)
 

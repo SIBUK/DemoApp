@@ -2,23 +2,24 @@
 
 Active Admin is a Ruby on Rails framework for creating elegant backends for website administration.
 
-[![Version     ](http://img.shields.io/gem/v/activeadmin.svg)                       ](https://rubygems.org/gems/activeadmin)
-[![Dependencies](http://img.shields.io/gemnasium/gregbell/active_admin.svg)         ](https://gemnasium.com/gregbell/active_admin)
-[![Travis CI   ](http://img.shields.io/travis/gregbell/active_admin/master.svg)     ](https://travis-ci.org/gregbell/active_admin)
-[![Quality     ](http://img.shields.io/codeclimate/github/gregbell/active_admin.svg)](https://codeclimate.com/github/gregbell/active_admin)
-[![Coverage    ](http://img.shields.io/coveralls/gregbell/active_admin.svg)         ](https://coveralls.io/r/gregbell/active_admin)
-[![Gittip      ](http://img.shields.io/gittip/activeadmin.svg)                      ](https://gittip.com/activeadmin)
+[![Version         ](http://img.shields.io/gem/v/activeadmin.svg)                               ](https://rubygems.org/gems/activeadmin)
+[![Travis CI       ](http://img.shields.io/travis/activeadmin/activeadmin/master.svg)           ](https://travis-ci.org/activeadmin/activeadmin)
+[![Quality         ](http://img.shields.io/codeclimate/github/activeadmin/activeadmin.svg)      ](https://codeclimate.com/github/activeadmin/activeadmin)
+[![Coverage        ](http://img.shields.io/coveralls/activeadmin/activeadmin.svg)               ](https://coveralls.io/r/activeadmin/activeadmin)
+[![Gittip          ](http://img.shields.io/gittip/activeadmin.svg)                              ](https://gittip.com/activeadmin)
+[![Inch CI         ](http://inch-ci.org/github/activeadmin/activeadmin.svg?branch=master)       ](http://inch-ci.org/github/activeadmin/activeadmin)
+[![Stories in Ready](http://badge.waffle.io/activeadmin/activeadmin.png?label=ready&title=ready)](https://waffle.io/activeadmin/activeadmin)
 
 ## State of the project
 
 ### 1.0.0
 
-We're [currently working on 1.0.0](https://github.com/gregbell/active_admin/issues?milestone=18),
+We're [currently working on 1.0.0](https://github.com/activeadmin/activeadmin/issues?milestone=18),
 which as far as dependencies, moves us from meta_search to Ransack and adds Rails 4 support.
-You can get Rails 4 and 4.1 support by tracking master:
+You can get Rails 4.x support by tracking master:
 
 ```ruby
-gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'activeadmin', github: 'activeadmin'
 ```
 
 ### 0.6.x
@@ -28,22 +29,22 @@ still be maintained, and we will backport bug fixes into future 0.6.x releases. 
 to have to wait for a release, you can track the branch instead:
 
 ```ruby
-gem 'activeadmin', github: 'gregbell/active_admin', branch: '0-6-stable'
+gem 'activeadmin', github: 'activeadmin', branch: '0-6-stable'
 ```
 
 ## Documentation
 
 Please note that <http://activeadmin.info> is out of date. For the latest docs, check out the
-Github [docs folder](https://github.com/gregbell/active_admin/tree/master/docs) and the [wiki](https://github.com/gregbell/active_admin/wiki).
+Github [docs](https://github.com/activeadmin/activeadmin/tree/master/docs#activeadmin-documentation) and the [wiki](https://github.com/activeadmin/activeadmin/wiki).
 
 ## Links
 
-* Website: <http://www.activeadmin.info>
+* Website: <http://www.activeadmin.info> (out of date)
 * Live demo: <http://demo.activeadmin.info/admin>
 * Documentation
-  * Guides: <http://activeadmin.info/documentation.html>
-  * YARD: <http://rubydoc.info/gems/activeadmin/frames>
-  * Wiki: <https://github.com/gregbell/active_admin/wiki>
+  * Guides: <https://github.com/activeadmin/activeadmin/tree/master/docs>
+  * YARD: <http://rubydoc.info/gems/activeadmin>
+  * Wiki: <https://github.com/activeadmin/activeadmin/wiki>
 
 ## Goals
 
@@ -53,7 +54,7 @@ Github [docs folder](https://github.com/gregbell/active_admin/tree/master/docs) 
 
 ## Getting started
 
-Check out [the docs](https://github.com/gregbell/active_admin/blob/master/docs/0-installation.md)!
+Check out [the docs](https://github.com/activeadmin/activeadmin/blob/master/docs/0-installation.md)!
 
 ## Need help?
 
@@ -63,9 +64,9 @@ Ask us in IRC ([#activeadmin](https://webchat.freenode.net/?channels=activeadmin
 
 ## Want to contribute?
 
-The [contributing guide](https://github.com/gregbell/active_admin/blob/master/CONTRIBUTING.md)
+The [contributing guide](https://github.com/activeadmin/activeadmin/blob/master/CONTRIBUTING.md)
 is a good place to start. If you have questions, feel free to ask
-[@seanlinsley](https://twitter.com/seanlinsley).
+[@seanlinsley](https://twitter.com/seanlinsley) or [@captainhagbard](https://twitter.com/captainhagbard).
 
 ## Dependencies
 
@@ -81,7 +82,7 @@ Tool                  | Description
 [Kaminari]            | Elegant pagination for any sort of collection
 [Ransack]             | Provides a simple search API to query your data
 
-[Arbre]: https://github.com/gregbell/arbre
+[Arbre]: https://github.com/activeadmin/arbre
 [Devise]: https://github.com/plataformatec/devise
 [Formtastic]: https://github.com/justinfrench/formtastic
 [Iconic Icons]: http://somerandomdude.com/projects/iconic

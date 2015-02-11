@@ -283,15 +283,25 @@ ActiveAdmin.register Post do
 end
 ```
 
-## Customizing resource retrieval
+## Eager loading
 
 A common way to increase page performance is to elimate N+1 queries by eager loading associations:
 
 ```ruby
 ActiveAdmin.register Post do
+  includes :author, :categories
+end
+```
+
+## Customizing resource retrieval
+
+If you need to customize the collection properties, you can overwrite the `scoped_collection` method.
+
+```ruby
+ActiveAdmin.register Post do
   controller do
     def scoped_collection
-      super.includes :author, :categories
+      end_of_association_chain.where(visibility: true)
     end
   end
 end
@@ -380,9 +390,18 @@ different menus, say perhaps based on user permissions. For example:
 
 ```ruby
 ActiveAdmin.register Ticket do
-  belongs_to: :project
+  belongs_to :project
   navigation_menu do
     authorized?(:manage, SomeResource) ? :project : :restricted_menu
   end
+end
+```
+
+If you still want your `belongs_to` resources to be available in the default menu
+and through non-nested routes, you can use the `:optional` option. For example:
+
+```ruby
+ActiveAdmin.register Ticket do
+  belongs_to :project, optional: true
 end
 ```

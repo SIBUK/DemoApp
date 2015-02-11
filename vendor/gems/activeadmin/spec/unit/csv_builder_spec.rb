@@ -94,6 +94,40 @@ describe ActiveAdmin::CSVBuilder do
     end
   end
 
+  context "with a humanize_name column option" do
+    context "with symbol column name" do
+      let(:builder) do
+        ActiveAdmin::CSVBuilder.new do
+          column :my_title, humanize_name: false
+        end.tap(&:exec_columns)
+      end
+
+      describe "the column" do
+        let(:column){ builder.columns.first }
+
+        it "should have a name of 'my_title'" do
+          expect(column.name).to eq "my_title"
+        end
+      end
+    end
+
+    context "with string column name" do
+      let(:builder) do
+        ActiveAdmin::CSVBuilder.new do
+          column "my_title", humanize_name: false
+        end.tap(&:exec_columns)
+      end
+
+      describe "the column" do
+        let(:column){ builder.columns.first }
+
+        it "should have a name of 'my_title'" do
+          expect(column.name).to eq "my_title"
+        end
+      end
+    end
+  end
+
   context "with a separator" do
     let(:builder) do
       ActiveAdmin::CSVBuilder.new(col_sep: ";").tap(&:exec_columns)
@@ -101,6 +135,26 @@ describe ActiveAdmin::CSVBuilder do
 
     it "should have proper separator" do
       expect(builder.options).to eq({col_sep: ";"})
+    end
+  end
+
+  context "with humanize_name option" do
+    let(:builder) do
+      ActiveAdmin::CSVBuilder.new(humanize_name: false) do
+        column :my_title
+      end.tap(&:exec_columns)
+    end
+
+    describe "the column" do
+      let(:column){ builder.columns.first }
+
+      it "should have humanize_name option set" do
+        expect(column.options).to eq humanize_name: false
+      end
+
+      it "should have a name of 'my_title'" do
+        expect(column.name).to eq "my_title"
+      end
     end
   end
 
@@ -131,7 +185,41 @@ describe ActiveAdmin::CSVBuilder do
     end
   end
 
-  skip '#build'
+  context "build csv using the supplied order" do
+    before do
+      @post1 = Post.create!(title: "Hello1", published_at: Date.today - 2.day )
+      @post2 = Post.create!(title: "Hello2", published_at: Date.today - 1.day )
+    end
+    let(:dummy_controller) {
+      class DummyController
+        def collection
+          Post.order('published_at DESC')
+        end
+
+        def apply_decorator(resource)
+          resource
+        end
+
+        def view_context
+        end
+      end
+      DummyController.new
+    }
+    let(:builder) do
+      ActiveAdmin::CSVBuilder.new do
+        column "id"
+        column "title"
+        column "published_at"
+      end
+    end
+
+    it "should generate data with the supplied order" do
+      expect(builder).to receive(:build_row).and_return([]).once.ordered { |post| expect(post.id).to eq @post2.id }
+      expect(builder).to receive(:build_row).and_return([]).once.ordered { |post| expect(post.id).to eq @post1.id }
+      builder.build dummy_controller, []
+    end
+  end
+
   skip '#exec_columns'
 
   skip '#build_row' do

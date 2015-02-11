@@ -65,7 +65,7 @@ Feature: Format as CSV
     Given a configuration of:
     """
       ActiveAdmin.register Post do
-        csv :force_quotes => true do
+        csv :force_quotes => true, :byte_order_mark => "" do
           column :title
           column :body
         end
@@ -115,6 +115,41 @@ Feature: Format as CSV
       | Title  | Body |
       | 012345 | (.*) |
     And the CSV file should contain "012345" in quotes
+
+    Scenario: Without CVS column names explicitely specified
+    Given a configuration of:
+    """
+      ActiveAdmin.application.csv_options = {:col_sep => ',', :force_quotes => true}
+      ActiveAdmin.register Post do
+        csv :column_names => true do
+          column :title
+          column :body
+        end
+      end
+    """
+    And a post with the title "012345" exists
+    When I am on the index page for posts
+    And I follow "CSV"
+    And I should download a CSV file with "," separator for "posts" containing:
+      | Title  | Body |
+      | 012345 | (.*) |
+
+  Scenario: Without CVS column names
+    Given a configuration of:
+    """
+      ActiveAdmin.application.csv_options = {:col_sep => ',', :force_quotes => true}
+      ActiveAdmin.register Post do
+        csv :column_names => false do
+          column :title
+          column :body
+        end
+      end
+    """
+    And a post with the title "012345" exists
+    When I am on the index page for posts
+    And I follow "CSV"
+    And I should download a CSV file with "," separator for "posts" containing:
+      | 012345 | (.*) |
 
   Scenario: With encoding CSV options
     Given a configuration of:

@@ -81,6 +81,9 @@ inject_into_file "config/environments/test.rb", "  config.action_mailer.default_
 inject_into_file "config/environment.rb", "\n$LOAD_PATH.unshift('#{File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'lib'))}')\nrequire \"active_admin\"\n", after: "require File.expand_path('../application', __FILE__)"
 inject_into_file "config/application.rb", "\nrequire 'devise'\n", after: "require 'rails/all'"
 
+# Force strong parameters to raise exceptions
+inject_into_file 'config/application.rb', "\n\n    config.action_controller.action_on_unpermitted_parameters = :raise if Rails::VERSION::MAJOR == 4\n\n", after: 'class Application < Rails::Application'
+
 # Add some translations
 append_file "config/locales/en.yml", File.read(File.expand_path('../templates/en.yml', __FILE__))
 
@@ -93,6 +96,9 @@ directory File.expand_path('../templates/policies', __FILE__), 'app/policies'
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 generate 'active_admin:install'
+
+inject_into_file "config/routes.rb", "\n  root to: redirect('/admin')", after: /.*::Application.routes.draw do/
+remove_file "public/index.html" if File.exists? "public/index.html"
 
 # Devise master doesn't set up its secret key on Rails 4.1
 # https://github.com/plataformatec/devise/issues/2554
