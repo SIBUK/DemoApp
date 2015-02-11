@@ -1,12 +1,11 @@
 source 'https://rubygems.org'
 
-
+gem 'devise', '~> 3.2.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 # Use progreSQL as the database for Active Record
 gem 'pg', '~> 0.18.0.pre20141117110243'
 # Active Admin
-gem 'devise', '~> 3.2.4'
 gem 'activeadmin', :path => "vendor/gems/activeadmin"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
