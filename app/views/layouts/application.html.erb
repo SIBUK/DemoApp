@@ -1,26 +1,72 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
-  <title>DemoApp</title>
+  <title>Obscura</title>
+  <meta charset="UTF-8">
+
+
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="style/css/style.css" media="all">
+  <link rel="stylesheet" type="text/css" href="style/css/media-queries.css">
+  <link rel="stylesheet" type="text/css" href="style/js/player/mediaelementplayer.css">
+  <link rel="stylesheet" type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,700,700italic|Open+Sans+Condensed:300,700'>
+  <!--[if IE 8]>
+  <link rel="stylesheet" type="text/css" href="style/css/ie8.css" media="all">
+  <![endif]-->
+  <!--[if IE 9]>
+  <link rel="stylesheet" type="text/css" href="style/css/ie9.css" media="all">
+  <![endif]-->
+  <script src="style/js/jquery-1.7.2.min.js"></script>
+  <script src="style/js/ddsmoothmenu.js"></script>
+  <script src="style/js/retina.js"></script>
+  <script src="style/js/selectnav.js"></script>
+  <script src="style/js/jquery.masonry.min.js"></script>
+  <script src="style/js/jquery.fitvids.js"></script>
+  <script src="style/js/jquery.backstretch.min.js"></script>
+  <script src="style/js/mediaelement.min.js"></script>
+  <script src="style/js/mediaelementplayer.min.js"></script>
+  <script src="style/js/jquery.dcflickr.1.0.js"></script>
+  <script src="style/js/twitter.min.js"></script>
+  <script>$.backstretch("<%= image_url("bg/1.jpg") %>");</script>
+
 </head>
 <body>
-
-<div>
-  <ul class="main-nav">
-    <li><%= link_to "Home", root_path %></li>
-    <li><%= link_to "About", about_path %></li>
-    <li><%= link_to "Blog", posts_path %></li>
-    <li><%= link_to "Contact", contact_path %></li>
-    <li><%= link_to "Resources", resources_path %></li>
-  </ul>
+<div class="scanlines"></div>
+<div class="header-wrapper opacity">
+  <div class="header">
+    <div class="logo"> <a href="index.html"> <%= image_tag "logo.png" %> </a> </div>
+    <div id="menu-wrapper">
+      <div id="menu" class="menu">
+        <ul id="tiny">
+          <li class="active"><a href="index.html">Blog</a>
+            <ul>
+              <li><a href="post.html">Blog Post</a></li>
+            </ul>
+          </li>
+          <li><a href="page-with-sidebar.html">Pages</a>
+            <ul>
+              <li><a href="page-with-sidebar.html">Page With Sidebar</a></li>
+              <li><a href="full-width.html">Full Width</a></li>
+            </ul>
+          </li>
+          <li><a href="typography.html">Styles</a>
+            <ul>
+              <li><a href="typography.html">Typography</a></li>
+              <li><a href="columns.html">Columns</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
 </div>
-
-<% flash.each do |key, value| %>
-<P><%= value %></P>
-<% end %>
 
 <%= yield %>
 
