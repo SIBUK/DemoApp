@@ -34,7 +34,9 @@
         <div class="audio-wrapper">
           <div class="vinyl">
             <dl>
-              <dt class="art"> <%= image_tag "vinyl.png",alt: "", class: "highlight" %> <%= image_tag "art/artwork.png",alt: "" %> </dt>
+              <% img1 = image_tag "vinyl.png",alt: "", class: "highlight" %>
+              <% img2 = image_tag "art/artwork.png",alt: "" %>
+              <dt class="art">  <%= img2 %> </dt>
               <dd class="song">
                 <div class="icon-song"></div>
                 Om Du Möter Varg</dd>
