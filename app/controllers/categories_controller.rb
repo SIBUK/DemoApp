@@ -13,6 +13,14 @@ class CategoriesController < ApplicationController
     @posts = @category.posts
   end
 
+  def new
+    aaaa=0
+  end
+
+  def create
+    aaaa=0
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category

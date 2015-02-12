@@ -1,2 +1,7 @@
-<h1>Laura stinks!!!!!!</h1>
+<h1>Welcome to my Ruby Blog</h1>
 <p>Now everything is set up and I can start work on my page :)</p>
+
+<% @posts.each do |post| %>
+    <h3><%= link_to post.title, post %></h3>
+    <p><%= post.body %></p>
+<% end %>

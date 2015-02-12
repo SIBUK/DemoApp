@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'pages/about'
+
+  get 'pages/contact'
+
+  get 'pages/resources'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'categories/new'
@@ -20,6 +26,9 @@ Rails.application.routes.draw do
   resources :posts
   resources :categories
 
+  match 'about' => 'pages#about', :via => [:get]
+  match 'resources' => 'pages#resources', :via => [:get]
+  match 'contact' => 'pages#contact', :via => [:get]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
