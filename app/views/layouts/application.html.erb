@@ -68,6 +68,11 @@
   </div>
 </div>
 
+
+<% flash.each do |key, value| %>
+    <P><%= value %></P>
+<% end %>
+
 <%= yield %>
 
 </body>

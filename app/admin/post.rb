@@ -1,6 +1,7 @@
 ActiveAdmin.register Post do
 
 
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -13,7 +14,7 @@ ActiveAdmin.register Post do
   #   permitted << :other if resource.something?
   #   permitted
   # end
-  permit_params :title, :body, :category_id, :posttype, :url, :quoteauthor, :song, :artist, :album
+  permit_params :title, :body, :category_id, :posttype, :url, :quoteauthor, :song, :artist, :album, :image
 
 
   index do
@@ -22,8 +23,18 @@ ActiveAdmin.register Post do
     #  link_to "#{user.email}", "mailto:#{user.name}<#{user.email}>?subject=Enquiry"
     #end
     column("Created", :created_at)
-    column("Last Login", :last_login_at)
     actions
+  end
+
+  show do |f|
+    attributes_table do
+      row :title
+      row :created_at
+      row :thumbnail do
+        image_tag(f.image.url(:thumb))
+      end
+      # Will display the image on show object page
+    end
   end
 
   form do |f|
@@ -37,6 +48,8 @@ ActiveAdmin.register Post do
       f.input :song
       f.input :artist
       f.input :album
+      #f.input :image, :as => :file, :hint => f.template.image_tag(f.object.image.url(:thumb))
+      f.input :image, :required => false, :as => :file
     end
     f.actions
   end
