@@ -18,10 +18,17 @@
         <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of autumn which I enjoy with my whole heart.</p>
         <div class="details"> <span class="icon-image"><a href="#">September 26, 2045</a></span> <span class="likes"><a href="#" class="likeThis">44</a></span> <span class="comments"><a href="#">3</a></span> </div>
       </div>
-      <div class="post format-quote box">
-        <blockquote>Scissors cuts paper, paper covers rock, rock crushes lizard, lizard poisons Spock, Spock smashes scissors, scissors decapitates lizard, lizard eats paper, paper disproves Spock, Spock vaporizes rock, and as it always has, rock crushes scissors.<cite>Sheldon Cooper</cite></blockquote>
-        <div class="details"> <span class="icon-quote"><a href="#">September 21, 2045</a></span> <span class="likes"><a href="#" class="likeThis">27</a></span> <span class="comments"><a href="#">4</a></span> </div>
-      </div>
+
+      <% @posts.each do |post| %>
+
+          <div class="post format-standard box">
+            <h2 class="title"><a href="post.html"><%= post.title %></a></h2>
+            <p><%= post.body %></p>
+            <div class="details"> <span class="icon-standard"><a href="#"><%= post.created_at.strftime("%A %d. %Y") %></a></span> <span class="likes"><a href="#" class="likeThis">11</a></span> <span class="comments"><a href="#">0</a></span> </div>
+          </div>
+
+      <% end %>
+
       <div class="post format-video box">
         <div class="video frame">
           <iframe src="http://player.vimeo.com/video/40558553?title=0&byline=0&portrait=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
