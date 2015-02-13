@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211001541) do
+ActiveRecord::Schema.define(version: 20150213002537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,12 @@ ActiveRecord::Schema.define(version: 20150211001541) do
     t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "posttype",    default: 0
+    t.string   "url"
+    t.string   "quoteauthor"
+    t.string   "song"
+    t.string   "artist"
+    t.string   "album"
   end
 
 end
