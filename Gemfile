@@ -42,4 +42,4 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'paperclip', '~> 4.2.1'
-#gem 'rmagick'
+gem 'rmagick', '~> 2.13.4'
