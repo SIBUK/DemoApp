@@ -35,49 +35,47 @@
           <% elsif post.posttype.to_sym == :video %>
               <div class="post format-video box">
                 <div class="video frame">
-                  <iframe src="<%= post.url %>" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                  <% url = post.url %>
+                  <% if post.url.include? "www.youtube.com" %>
+                      <% url.sub!('watch?v=', 'embed/') %>
+                  <% end %>
+                  <iframe src="<%= url %>" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                 </div>
                 <h2 class="title"><a href="post.html"><%= post.title %></a></h2>
                 <p><%= post.body %></p>
                 <div class="details"> <span class="icon-video"><a href="#"><%= post.created_at.strftime("%A %d. %Y") %></a></span> <span class="likes"><a href="#" class="likeThis">18</a></span> <span class="comments"><a href="#">1</a></span> </div>
               </div>
+          <% elsif post.posttype.to_sym == :music %>
+              <div class="post format-audio box">
+                <div class="audio-wrapper">
+                  <div class="vinyl">
+                    <dl>
+                      <% img1 = image_tag "vinyl.png",alt: "", class: "highlight" %>
+                      <% img2 = image_tag "art/artwork.png",alt: "" %>
+                      <dt class="art">  <%= img2 %> </dt>
+                      <dd class="song">
+                        <div class="icon-song"></div>
+                        <%= post.song %></dd>
+                      <dd class="artist">
+                        <div class="icon-artist"></div>
+                        <%= post.artist %></dd>
+                      <dd class="album">
+                        <div class="icon-album"></div>
+                        <%= post.album %></dd>
+                    </dl>
+                  </div>
+                  <div class="clear"></div>
+                  <div class="audio">
+                    <audio controls="" preload="none" src="<%= post.url %>"></audio>
+                  </div>
+                </div>
+                <p><%= post.body %></p>
+                <div class="details"> <span class="icon-audio"><a href="#"><%= post.created_at.strftime("%A %d. %Y") %></a></span> <span class="likes"><a href="#" class="likeThis">20</a></span> <span class="comments"><a href="#">1</a></span> </div>
+              </div>
           <% end %>
       <% end %>
 
 
-
-      <div class="post format-quote box">
-        <blockquote>Scissors cuts paper, paper covers rock, rock crushes lizard, lizard poisons Spock, Spock smashes scissors, scissors decapitates lizard, lizard eats paper, paper disproves Spock, Spock vaporizes rock, and as it always has, rock crushes scissors.<cite>Sheldon Cooper</cite></blockquote>
-        <div class="details"> <span class="icon-quote"><a href="#">September 21, 2045</a></span> <span class="likes"><a href="#" class="likeThis">27</a></span> <span class="comments"><a href="#">4</a></span> </div>
-      </div>
-
-
-      <div class="post format-audio box">
-        <div class="audio-wrapper">
-          <div class="vinyl">
-            <dl>
-              <% img1 = image_tag "vinyl.png",alt: "", class: "highlight" %>
-              <% img2 = image_tag "art/artwork.png",alt: "" %>
-              <dt class="art">  <%= img2 %> </dt>
-              <dd class="song">
-                <div class="icon-song"></div>
-                Om Du Möter Varg</dd>
-              <dd class="artist">
-                <div class="icon-artist"></div>
-                Detektivbyrån</dd>
-              <dd class="album">
-                <div class="icon-album"></div>
-                Wermland</dd>
-            </dl>
-          </div>
-          <div class="clear"></div>
-          <div class="audio">
-            <audio controls="" preload="none" src="http://elemisdesign.com/files/omdumotervarg.mp3"></audio>
-          </div>
-        </div>
-        <p><strong>Detektivbyrån</strong> (&#8220;The Detective Agency&#8221;) was a <a href="#">Swedish</a> <a href="#">electronica</a> and <a href="#">folk music</a> trio from <a href="#">Gothenburg</a>. The group consisted of Anders &#8220;Flanders&#8221; Molin (<a href="#">accordion</a>, <a href="#">music box</a>), Martin &#8220;MacGyver&#8221; Molin (<a href="#">glockenspiel</a>, traktofon, toy <a href="#">piano</a>, <a href="#">Theremin</a>) and Jon Nils Emanuel Ekström <a href="#">drums</a>, <a href="#">sound box</a>, <a href="#">small bells</a>.</p>
-        <div class="details"> <span class="icon-audio"><a href="#">September 7, 2045</a></span> <span class="likes"><a href="#" class="likeThis">20</a></span> <span class="comments"><a href="#">1</a></span> </div>
-      </div>
       <div class="post format-chat box">
         <h2 class="title"><a href="post.html">Two Best Friends</a></h2>
         <ul>
@@ -157,6 +155,6 @@
   </div>
 </div>
 <div class="site-generator-wrapper">
-  <div class="site-generator">Copyright Obscura 2045. All rights reserved // Design by <a href="http://elemisfreebies.com">elemis</a>.</div>
+  <div class="site-generator">Copyright Simon Bailey 2015. All rights reserved // Design by <a href="http://elemisfreebies.com">elemis</a>.</div>
 </div>
 <script src="style/js/scripts.js"></script>
