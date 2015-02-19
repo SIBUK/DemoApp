@@ -54,7 +54,7 @@
                     <dl>
                       <% img1 = image_tag "vinyl.png",alt: "", class: "highlight" %>
                       <% img2 = image_tag "art/artwork.png",alt: "" %>
-                      <dt class="art">  <%= img2 %> </dt>
+                      <dt class="art">  <%= img1 %><%= img2 %> </dt>
                       <dd class="song">
                         <div class="icon-song"></div>
                         <%= post.song %></dd>
@@ -159,4 +159,4 @@
 <div class="site-generator-wrapper">
   <div class="site-generator">Copyright Simon Bailey 2015. All rights reserved // Design by <a href="http://elemisfreebies.com">elemis</a>.</div>
 </div>
-<script src="style/js/scripts.js"></script>
+<%= javascript_include_tag "scripts" %>

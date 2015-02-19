@@ -11,27 +11,19 @@
   <%= csrf_meta_tags %>
 
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <link rel="stylesheet" type="text/css" href="style/css/style.css" media="all">
-  <link rel="stylesheet" type="text/css" href="style/css/media-queries.css">
-  <link rel="stylesheet" type="text/css" href="style/js/player/mediaelementplayer.css">
   <link rel="stylesheet" type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,700,700italic|Open+Sans+Condensed:300,700'>
-  <!--[if IE 8]>
-  <link rel="stylesheet" type="text/css" href="style/css/ie8.css" media="all">
-  <![endif]-->
-  <!--[if IE 9]>
-  <link rel="stylesheet" type="text/css" href="style/css/ie9.css" media="all">
-  <![endif]-->
-  <script src="style/js/jquery-1.7.2.min.js"></script>
-  <script src="style/js/ddsmoothmenu.js"></script>
-  <script src="style/js/retina.js"></script>
-  <script src="style/js/selectnav.js"></script>
-  <script src="style/js/jquery.masonry.min.js"></script>
-  <script src="style/js/jquery.fitvids.js"></script>
-  <script src="style/js/jquery.backstretch.min.js"></script>
-  <script src="style/js/mediaelement.min.js"></script>
-  <script src="style/js/mediaelementplayer.min.js"></script>
-  <script src="style/js/jquery.dcflickr.1.0.js"></script>
-  <script src="style/js/twitter.min.js"></script>
+
+  <%= javascript_include_tag "jquery-1.7.2.min" %>
+  <%= javascript_include_tag "ddsmoothmenu" %>
+  <%= javascript_include_tag "retina" %>
+  <%= javascript_include_tag "selectnav" %>
+  <%= javascript_include_tag "jquery.masonry.min" %>
+  <%= javascript_include_tag "jquery.fitvids" %>
+  <%= javascript_include_tag "jquery.backstretch.min" %>
+  <%= javascript_include_tag "mediaelement.min" %>
+  <%= javascript_include_tag "mediaelementplayer.min" %>
+  <%= javascript_include_tag "jquery.dcflickr.1.0" %>
+  <%= javascript_include_tag "twitter.min" %>
   <script>$.backstretch("<%= image_url("bg/1.jpg") %>");</script>
 
 </head>
@@ -43,7 +35,12 @@
     <div id="menu-wrapper">
       <div id="menu" class="menu">
         <ul id="tiny">
-          <li class="active"><a href="index.html">Blog</a>
+          <li class="active"><%= link_to "Admin", admin_dashboard_path %></a>
+            <ul>
+              <li><%= link_to "Admin Area", admin_dashboard_path %></li>
+            </ul>
+          </li>
+          <li><a href="index.html">Blog</a>
             <ul>
               <li><a href="post.html">Blog Post</a></li>
             </ul>
