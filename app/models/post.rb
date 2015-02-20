@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  enum posttype: {text: 0, image: 1, video: 2, music: 3, quote: 4}
+  enum posttype: {text: 0, image: 1, video: 2, music: 3, quote: 4, dialogue: 5}
 
   belongs_to :category
 
