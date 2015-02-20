@@ -41,7 +41,7 @@
                   <% if post.url.include? "www.youtube.com" %>
                       <% url.sub!('watch?v=', 'embed/') %>
                   <% end %>
-                  <iframe src="<%= url %>" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                  <iframe src="<%= url %>" width="640" height="360" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                 </div>
                 <h2 class="title"><a href="post.html"><%= post.title %></a></h2>
                 <p><%= post.body %></p>
