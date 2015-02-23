@@ -29,11 +29,17 @@ ActiveAdmin.register Post do
   show do |f|
     attributes_table do
       row :title
+      row :body
+      row :posttype, collection: Post.posttypes.keys.to_s.capitalize
       row :created_at
       row :thumbnail do
-        image_tag(f.image.url(:thumb))
+        image_tag(f.image.url(:thumb)) # Will display the image on show object page
       end
-      # Will display the image on show object page
+      row :url
+      row :quoteauthor
+      row :song
+      row :artist
+      row :album
     end
   end
 
@@ -48,8 +54,7 @@ ActiveAdmin.register Post do
       f.input :song
       f.input :artist
       f.input :album
-      #f.input :image, :as => :file, :hint => f.template.image_tag(f.object.image.url(:thumb))
-      f.input :image, :required => false, :as => :file
+      f.input :image, required: false, as: :file, hint: image_tag(f.object.image.url(:thumb))
     end
     f.actions
   end

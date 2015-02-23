@@ -821,7 +821,7 @@ iframe {
   visibility: hidden;
 }
 .content {
-  width: 670px;
+  width: 750px;
   float: left;
 }
 .sidebar {
@@ -1795,9 +1795,11 @@ textarea:focus {
   background: #262626;
 }
 
+/*
 .frame a .more {
   background: #000 asset-data-url("icon-more.png") no-repeat center center;
 }
+*/
 
 #comments .message {
   background: #1d1d1d;
