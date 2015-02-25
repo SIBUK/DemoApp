@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :categories
+  resources :images
 
   match 'about' => 'pages#about', :via => [:get]
   match 'resources' => 'pages#resources', :via => [:get]

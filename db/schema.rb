@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213125124) do
+ActiveRecord::Schema.define(version: 20150223123445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,19 @@ ActiveRecord::Schema.define(version: 20150213125124) do
     t.datetime "updated_at"
   end
 
+  create_table "images", force: true do |t|
+    t.integer  "post_id"
+    t.string   "name"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "images", ["post_id"], name: "index_images_on_post_id", using: :btree
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "body"
@@ -62,16 +75,12 @@ ActiveRecord::Schema.define(version: 20150213125124) do
     t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "posttype",           default: 0
+    t.integer  "posttype",    default: 0
     t.string   "url"
     t.string   "quoteauthor"
     t.string   "song"
     t.string   "artist"
     t.string   "album"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
   end
 
 end
