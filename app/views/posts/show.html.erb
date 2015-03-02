@@ -1,7 +1,14 @@
   <div class="content box">
     <h1 class="title"><%= @post.title %></h1>
-    <div class="outer none"><span class="inset"><%= link_to (image_tag (@post.image.url(:medium)), alt: ""), @post.image.url(:large) %></span></div>
-    <p><%= @post.body %></p>
+    <% lines = @post.body.split("|") %>
+    <% pics = Pic.where("post_id = ?", @post.id) %>
+    <% lines.each_with_index do |line, idx| %>
+        <p><%= line %></p>
+        <% if idx < pics.size %>
+            <div class="outer none"><span class="inset"><%= link_to (image_tag (pics[idx].image.url(:medium)), alt: ""), pics[idx].image.url(:large) %></span></div>
+        <% end %>
+    <% end %>
+
   </div>
   <div class="sidebar box">
     <div class="sidebox widget">

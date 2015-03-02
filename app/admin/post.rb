@@ -12,7 +12,7 @@ ActiveAdmin.register Post do
   #   permitted << :other if resource.something?
   #   permitted
   # end
-  permit_params :title, :body, :category_id, :posttype, :url, :quoteauthor, :song, :artist, :album, :picture, :image
+  permit_params :title, :body, :category_id, :posttype, :url, :quoteauthor, :song, :artist, :album, :picture, :image, :pic
 
   index do
     column("Title", :title, :sortable => :title)  {|post| link_to "#{post.title}", admin_post_path(post) }
@@ -35,7 +35,7 @@ ActiveAdmin.register Post do
       row :artist
       row :album
 
-      table_for f.images.order('name ASC') do
+      table_for f.pics do
         column "Images" do |image|
           link_to( image_tag(image.image.url(:small)), [ :admin, image ])
         end

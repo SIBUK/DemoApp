@@ -15,7 +15,10 @@
 
           <% elsif post.posttype.to_sym == :image %>
               <div class="post format-image box">
-                <div class="frame"> <%= link_to (image_tag (post.image.url(:small)), alt: ""), post %> </div>
+                <% images = Pic.where("post_id = ?", post.id) %>
+                <% if images.size > 0 %>
+                <div class="frame"> <%= link_to (image_tag (images[0].image.url(:small)), alt: ""), post %> </div>
+                <% end %>
                 <h2 class="title"><%= link_to post.title, post %></h2>
                 <p><%= post.body %></p>
                 <div class="details"> <span class="icon-image"><a href="#"><%= post.created_at.strftime("%A %d. %Y") %></a></span> <span class="likes"><a href="#" class="likeThis">44</a></span> <span class="comments"><a href="#">3</a></span> </div>

@@ -1,4 +1,4 @@
-ActiveAdmin.register Image do
+ActiveAdmin.register Pic do
 
 
   # See permitted parameters documentation:
@@ -21,7 +21,7 @@ ActiveAdmin.register Image do
       row :name
       row :post_id
       row :thumbnail do
-        image_tag(f.image.url(:thumb)) # Will display the image on show object page
+        link_to(  image_tag(f.image.url(:thumb)), f.image.url(:large)) # Will display the image on show object page
       end
     end
   end

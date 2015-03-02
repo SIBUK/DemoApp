@@ -1,6 +1,6 @@
-class CreateImages < ActiveRecord::Migration
+class CreatePics < ActiveRecord::Migration
   def change
-    create_table :images do |t|
+    create_table :pics do |t|
       t.belongs_to :post, index:true
       t.string :name
       t.attachment :image
