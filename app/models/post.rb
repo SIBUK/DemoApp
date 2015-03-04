@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   has_many :pics, :dependent => :destroy
   accepts_nested_attributes_for :pics, :reject_if => lambda { |attributes| attributes[:thumb].blank? }, :allow_destroy => true
 
-  def get_formatted_post
-    kfff = 0
+  def like
+    self.increment!(:num_likes)
   end
 end

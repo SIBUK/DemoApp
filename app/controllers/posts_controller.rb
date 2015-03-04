@@ -47,4 +47,9 @@ class PostsController < ApplicationController
     redirect_to posts_path, :notice => "Your post was deleted"
   end
 
+  def like
+    @post = Post.find(params[:id])
+    @post.like
+  end
+
 end
