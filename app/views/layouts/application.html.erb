@@ -118,27 +118,7 @@
     </div>
     <div id="third" class="widget-area">
       <div id="example-widget-3" class="widget example">
-        <h3 class="widget-title">Popular Posts</h3>
-        <ul class="post-list">
-          <li>
-            <div class="frame"> <a href="#"><%= image_tag "art/s1.jpg",alt: "" %></a> </div>
-            <div class="meta">
-              <h6><a href="#">Charming Winter</a></h6>
-              <em>28th Sep 2045</em> </div>
-          </li>
-          <li>
-            <div class="frame"> <a href="#"><%= image_tag "art/s2.jpg",alt: "" %></a> </div>
-            <div class="meta">
-              <h6><a href="#">Trickling Stream</a></h6>
-              <em>5th Sep 2045</em> </div>
-          </li>
-          <li>
-            <div class="frame"> <a href="#"><%= image_tag "art/s3.jpg",alt: "" %></a> </div>
-            <div class="meta">
-              <h6><a href="#">Morning Glory</a></h6>
-              <em>26th Sep 2045</em> </div>
-          </li>
-        </ul>
+        <%= render partial: 'home/popular_post' %>
       </div>
     </div>
     <div id="fourth" class="widget-area">
@@ -151,7 +131,7 @@
   </div>
 </div>
 <div class="site-generator-wrapper">
-  <div class="site-generator">Copyright Simon Bailey 2015. All rights reserved // Design by <a href="http://elemisfreebies.com">elemis</a>.</div>
+  <div class="site-generator">Copyright Simon Bailey <%= time = Time.new; time.strftime("%Y") %>. All rights reserved // Design by <a href="http://elemisfreebies.com">elemis</a>.</div>
 </div>
 <%= javascript_include_tag "scripts" %>
 

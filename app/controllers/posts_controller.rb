@@ -12,6 +12,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @popular = Post.order('num_likes DESC').limit(3)
   end
 
   def new
