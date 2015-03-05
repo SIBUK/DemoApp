@@ -13,20 +13,20 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   <link rel="stylesheet" type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,700,700italic|Open+Sans+Condensed:300,700'>
 
-  <%= javascript_include_tag "jquery-1.7.2.min" %>
-  <%= javascript_include_tag "ddsmoothmenu" %>
-  <%= javascript_include_tag "retina" %>
-  <%= javascript_include_tag "selectnav" %>
-  <%= javascript_include_tag "jquery.masonry.min" %>
-  <%= javascript_include_tag "jquery.fitvids" %>
-  <%= javascript_include_tag "jquery.backstretch.min" %>
-  <%= javascript_include_tag "mediaelement.min" %>
-  <%= javascript_include_tag "mediaelementplayer.min" %>
-  <%= javascript_include_tag "jquery.dcflickr.1.0" %>
-  <script>$.backstretch("<%= image_url("bg/1.jpg") %>");</script>
+  <%= javascript_include_tag "jquery-1.7.2.min", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "ddsmoothmenu", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "retina", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "selectnav", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "jquery.masonry.min", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "jquery.fitvids", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "jquery.backstretch.min", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "mediaelement.min", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "mediaelementplayer.min", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "jquery.dcflickr.1.0", 'data-turbolinks-track' => true %>
 
 </head>
 <body>
+<script>$.backstretch("<%= image_url("bg/1.jpg") %>");</script>
 <div class="scanlines"></div>
 <div class="header-wrapper opacity">
   <div class="header">
