@@ -8,11 +8,14 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @popular = Post.order('num_likes DESC').limit(3)
   end
 
   def show
     @post = Post.find(params[:id])
     @popular = Post.order('num_likes DESC').limit(3)
+    @comments = PostComment.where(post_id: params[:id])
+    @post_comment = PostComment.new
   end
 
   def new

@@ -13,26 +13,33 @@
 
 
 
-
     <div id="comment-wrapper" class="box">
       <div id="comments">
         <h3 id="comments-title">3 Responses to "<%= @post.title %>"</h3>
         <ol id="singlecomments" class="commentlist">
+
+          <% @comments.each do |comment| %>
+
+
           <li class="comment">
             <div class="comment">
               <div class="comment-author vcard user frame"> <%= image_tag "avatar.jpg", alt: "", class: "avatar avatar-70 photo", width: 70, height: 70 %> </div>
               <div class="message"> <span class="reply-link"><a class="comment-reply-link" href="#">Reply</a></span>
                 <div class="info">
-                  <h2>Marshall Eriksen</h2>
+                  <h2><%= comment.name %></h2>
                   <span class="meta">September 13, 2045 at 12:32 pm</span> </div>
                 <div class="comment-body ">
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                  <p><%= comment.body %></p>
                 </div>
                 <span class="edit-link"></span> </div>
               <div class="clear"></div>
             </div>
             <div class="clear"></div>
           </li>
+
+
+          <% end %>
+
           <li class="comment">
             <div class="comment">
               <div class="comment-author vcard user frame"> <%= image_tag "avatar.jpg", alt: "", class: "avatar avatar-70 photo", width: 70, height: 70 %> </div>
@@ -70,30 +77,33 @@
       <div id="comment-form" class="comment-form">
         <div id="respond">
           <h3 id="reply-title">Leave a Reply</h3>
-          <form action="#" method="post" id="commentform">
-            <p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>
-            <p class="comment-form-author">
-              <label for="author">Name</label>
-              <span class="required">*</span>
-              <input id="author" name="author" type="text" value="" size="30" aria-required="true">
-            </p>
-            <p class="comment-form-email">
-              <label for="email">Email</label>
-              <span class="required">*</span>
-              <input id="email" name="email" type="text" value="" size="30" aria-required="true">
-            </p>
-            <p class="comment-form-url">
-              <label for="url">Website</label>
-              <input id="url" name="url" type="text" value="" size="30">
-            </p>
-            <p class="comment-form-comment">
-              <label for="comment">Comment</label>
-              <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
-            </p>
-            <p class="form-submit">
-              <input name="submit" type="submit" id="submit" value="Post Comment">
-            </p>
-          </form>
+
+
+
+          <p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>
+          <%= form_for @post_comment, id: "commentform" do |f| %>
+              <p class="comment-form-author">
+                <%= f.label :name, for: :author %>
+                <span class="required">*</span>
+                <%= f.text_field :name, name: "author", id: "author", type:"text" %>
+              </p>
+              <p class="comment-form-email">
+                <%= f.label :email, for: :email %>
+                <span class="required">*</span>
+                <%= f.text_field :email, type:"text" %>
+              </p>
+              <p class="comment-form-url">
+                <%= f.label :website, for: :website %>
+                <%= f.text_field :website, type:"text" %>
+              </p>
+              <p class="comment-form-comment">
+                <%= f.label "Comment", for: :body %>
+                <%= f.text_area :body, id: "comment", name: "comment", size: "45x8" %>
+              </p>
+              <p class="form-submit">
+                <%= f.submit 'Post Comment', name: "submit", type: "submit", id: "submit", style: "opacity: 1;" %>
+              </p>
+          <% end %>
         </div>
       </div>
     </div>
