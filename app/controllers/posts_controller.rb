@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @popular = Post.order('num_likes DESC').limit(3)
     @comments = PostComment.where(post_id: params[:id])
-    @post_comment = PostComment.new
+    @post_comment = PostComment.new(post: @post)
   end
 
   def new

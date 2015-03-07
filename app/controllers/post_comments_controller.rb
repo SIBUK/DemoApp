@@ -1,10 +1,10 @@
-class PostCommentsController < InheritedResources::Base
+class PostCommentsController < ApplicationController
 
   private
 
-    def post_comment_params
-      params.require(:post_comment).permit(:name, :email, :body, :website, :post_id, :post_comment_id)
-    end
+  def post_comment_params
+    params.require(:post_comment).permit(:name, :email, :body, :website, :post_id, :post_comment_id)
+  end
 
   public
 
@@ -14,7 +14,14 @@ class PostCommentsController < InheritedResources::Base
   end
 
   def create
-    ddd = 0
+    @post_comment = PostComment.new(post_comment_params)
+    if @post_comment.save
+      flash[:notice] = 'Comment successfully created'
+      redirect_to(@post_comment.post)
+    else
+      flash[:notice] = 'Error creating comment'
+      redirect_to(@post_comment.post)
+    end
   end
 
   def index

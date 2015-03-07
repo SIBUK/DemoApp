@@ -82,14 +82,14 @@
 
           <p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>
           <%= form_for @post_comment, id: "commentform" do |f| %>
+              <%= f.hidden_field :post_id, value: @post.id %>
               <p class="comment-form-author">
-                <%= f.label :name, for: :author %>
+                <%= f.label :name %>
                 <span class="required">*</span>
-                <%= f.text_field :name, name: "author", id: "author", type:"text" %>
+                <%= f.text_field :name, type:"text" %>
               </p>
               <p class="comment-form-email">
-                <%= f.label :email, for: :email %>
-                <span class="required">*</span>
+                <%= f.label :email %>
                 <%= f.text_field :email, type:"text" %>
               </p>
               <p class="comment-form-url">
@@ -98,7 +98,8 @@
               </p>
               <p class="comment-form-comment">
                 <%= f.label "Comment", for: :body %>
-                <%= f.text_area :body, id: "comment", name: "comment", size: "45x8" %>
+                <span class="required">*</span>
+                <%= f.text_area :body, size: "45x8" %>
               </p>
               <p class="form-submit">
                 <%= f.submit 'Post Comment', name: "submit", type: "submit", id: "submit", style: "opacity: 1;" %>
