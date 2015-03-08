@@ -9,7 +9,7 @@ class PostCommentsController < ApplicationController
   public
 
   def new
-    @post_comment = PostComment.new
+    @new_post_comment = PostComment.new
     @popular = Post.order('num_likes DESC').limit(3)
   end
 
@@ -30,8 +30,11 @@ class PostCommentsController < ApplicationController
   end
 
   def show
+    #Rails.logger.debug params.inspect
     @post_comment = PostComment.find(params[:id])
-    @popular = Post.order('num_likes DESC').limit(3)
+    new
   end
+
+
 end
 
