@@ -2,7 +2,7 @@
   <div id="comment-wrapper" class="box">
     <div id="comments">
       <ol id="singlecomments" class="commentlist">
-        <%= render partial: 'post_comments/comment', locals: {comment: @post_comment} %>
+        <%= render partial: 'post_comments/comment', locals: {comment: @post_comment, indent: 0} %>
       </ol>
     </div>
     <%= render partial: 'post_comments/new_comment', locals: {comment: @new_post_comment, post_id: @post_comment.post_id, comment_id: @post_comment.id} %>

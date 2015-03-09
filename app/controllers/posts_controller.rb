@@ -1,5 +1,3 @@
-require 'sort_comments'
-
 class PostsController < ApplicationController
   private
   def post_params
@@ -19,6 +17,7 @@ class PostsController < ApplicationController
     @comments = PostComment.where(post_id: params[:id])
     @aaa = SortComments.new(@comments)
     @aaa.recurse
+    @comments = @aaa.get_comments
     @post_comment = PostComment.new(post: @post)
   end
 
