@@ -14,10 +14,9 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @popular = Post.order('num_likes DESC').limit(3)
-    @comments = PostComment.where(post_id: params[:id])
-    @aaa = SortComments.new(@comments)
-    @aaa.recurse
-    @comments = @aaa.get_comments
+    sorted_comments = SortComments.new(PostComment.where(post_id: params[:id]))
+    @comments = sorted_comments.sort_comments
+    @response = sorted_comments.get_response
     @post_comment = PostComment.new(post: @post)
   end
 

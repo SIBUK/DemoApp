@@ -30,18 +30,18 @@
 <div class="scanlines"></div>
 <div class="header-wrapper opacity">
   <div class="header">
-    <div class="logo"> <a href="index.html"> <%= image_tag "name.png" %> </a> </div>
+    <div class="logo"> <%= link_to (image_tag "name.png"), root_path %> </div>
     <div id="menu-wrapper">
       <div id="menu" class="menu">
         <ul id="tiny">
-          <li class="active"><%= link_to "Admin", admin_dashboard_path %></a>
+          <li class="active"><%= link_to "Admin", admin_dashboard_path %>
             <ul>
               <li><%= link_to "Admin Area", admin_dashboard_path %></li>
             </ul>
           </li>
-          <li><a href="index.html">Blog</a>
+          <li><%= link_to "Home", root_path %>
             <ul>
-              <li><a href="post.html">Blog Post</a></li>
+              <li><%= link_to "Home", root_path %></li>
             </ul>
           </li>
           <li><a href="page-with-sidebar.html">Pages</a>
@@ -83,8 +83,9 @@
   </ul>
 
 
-<%= yield %>
+  <%= yield %>
 
+  <div class="clear"></div>
 </div>
 
 <div class="footer-wrapper">
