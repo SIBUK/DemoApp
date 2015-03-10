@@ -73,67 +73,22 @@
   <div class="intro">One must acknowledge the contribution that the kebab has made to this nation.</div>
   <div class="intro">~ Queen Elizabeth II</div>
   <ul class="social">
-    <li><a class="rss" href="#"></a></li>
-    <li><a class="facebook" href="#"></a></li>
-    <li><a class="twitter" href="#"></a></li>
-    <li><a class="pinterest" href="#"></a></li>
-    <li><a class="dribbble" href="#"></a></li>
-    <li><a class="flickr" href="#"></a></li>
-    <li><a class="linkedin" href="#"></a></li>
+    <li><a class="rss" href="https://www.rss.com"></a></li>
+    <li><a class="facebook" href="https://www.facebook.com"></a></li>
+    <li><a class="twitter" href="https://twitter.com"></a></li>
+    <li><a class="pinterest" href="https://uk.pinterest.com"></a></li>
+    <li><a class="dribbble" href="https://dribbble.com"></a></li>
+    <li><a class="flickr" href="https://www.flickr.com"></a></li>
+    <li><a class="linkedin" href="https://uk.linkedin.com"></a></li>
   </ul>
-
 
   <%= yield %>
 
   <div class="clear"></div>
 </div>
 
-<div class="footer-wrapper">
-  <div id="footer" class="four">
-    <div id="first" class="widget-area">
-      <div class="widget widget_search">
-        <h3 class="widget-title">Search</h3>
-        <form class="searchform" method="get" action="#">
-          <input type="text" name="s" value="type and hit enter" onFocus="this.value=''" onBlur="this.value='type and hit enter'"/>
-        </form>
-      </div>
-      <div class="widget widget_archive">
-        <h3 class="widget-title">Archives</h3>
-        <ul>
-          <li><a href="#">September 2045</a> (6)</li>
-          <li><a href="#">August 2045</a> (2)</li>
-          <li><a href="#">July 2045</a> (2)</li>
-          <li><a href="#">June 2045</a> (4)</li>
-          <li><a href="#">May 2045</a> (3)</li>
-          <li><a href="#">January 2045</a> (1)</li>
-        </ul>
-      </div>
-    </div>
-    <div id="second" class="widget-area">
-      <div id="twitter-2" class="widget widget_twitter">
-        <h3 class="widget-title">Twitter</h3>
-        <div id="twitter-wrapper">
-          <div id="twitter"></div>
-          <span class="username"><a href="#">&rarr; Follow @elemisdesign</a></span> </div>
-      </div>
-    </div>
-    <div id="third" class="widget-area">
-      <div id="example-widget-3" class="widget example">
-        <%= render partial: 'home/popular_post' %>
-      </div>
-    </div>
-    <div id="fourth" class="widget-area">
-      <div class="widget">
-        <h3 class="widget-title">Flickr</h3>
-        <ul class="flickr-feed">
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="site-generator-wrapper">
-  <div class="site-generator">Copyright Simon Bailey <%= time = Time.new; time.strftime("%Y") %>. All rights reserved // Design by <a href="http://elemisfreebies.com">elemis</a>.</div>
-</div>
+<%= render partial: 'home/main_page_footer' %>
+
 <%= javascript_include_tag "scripts" %>
 
 </body>

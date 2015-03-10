@@ -1,0 +1,44 @@
+<div class="footer-wrapper">
+  <div id="footer" class="four">
+    <div id="first" class="widget-area">
+      <div class="widget widget_search">
+        <h3 class="widget-title">Search</h3>
+        <form class="searchform" method="get" action="#">
+          <input type="text" name="s" value="type and hit enter" onFocus="this.value=''" onBlur="this.value='type and hit enter'"/>
+        </form>
+      </div>
+      <div class="widget widget_archive">
+        <h3 class="widget-title">Archives</h3>
+        <ul>
+          <% posts_by_month = Post.all.group_by { |post| post.created_at.strftime("%B %Y") } %>
+          <% posts_by_month.sort.reverse.each do |month, posts| %>
+              <li><%= link_to Date.parse(month).strftime("%B %Y"), root_path(sel: posts) %> (<%=posts.count%>)</li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div id="second" class="widget-area">
+      <div id="twitter-2" class="widget widget_twitter">
+        <h3 class="widget-title">Twitter</h3>
+        <div id="twitter-wrapper">
+          <div id="twitter"></div>
+          <span class="username"><a href="#">&rarr; Follow @simonbailey</a></span> </div>
+      </div>
+    </div>
+    <div id="third" class="widget-area">
+      <div id="example-widget-3" class="widget example">
+        <%= render partial: 'home/popular_post' %>
+      </div>
+    </div>
+    <div id="fourth" class="widget-area">
+      <div class="widget">
+        <h3 class="widget-title">Flickr</h3>
+        <ul class="flickr-feed">
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="site-generator-wrapper">
+  <div class="site-generator">Copyright Simon Bailey <%= time = Time.new; time.strftime("%Y") %>. All rights reserved // Design by <a href="http://elemisfreebies.com">elemis</a>.</div>
+</div>

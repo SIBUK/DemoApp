@@ -1,5 +1,5 @@
 <div class="details">
   <span class="<%= icon %>"><a href="#"><%= post.created_at.strftime("%A #{post.created_at.day.ordinalize} %B %Y") %></a></span>
   <span class="likes"> <%= link_to post.num_likes, like_post_path(post.id), id: post.id, class: 'likeThis', remote: true %></span>
-  <span class="comments"><a href="#">3</a></span>
+  <span class="comments"> <%= link_to post.post_comments.count, post_path(post.id), class: 'likeThis' %> </span>
 </div>
