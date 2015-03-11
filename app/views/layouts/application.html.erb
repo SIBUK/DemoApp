@@ -26,7 +26,7 @@
 
 </head>
 <body>
-<script>$.backstretch("<%= image_url("bg/1.jpg") %>");</script>
+<script>$.backstretch("<%= image_url("bg/#{rand(1..9)}.jpg") %>");</script>
 <div class="scanlines"></div>
 <div class="header-wrapper opacity">
   <div class="header">

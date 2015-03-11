@@ -7,11 +7,13 @@ class PostsController < ApplicationController
   public
 
   def index
-    @posts = Post.all
+    @q = Post.search(params[:q])
+    @posts = @q.result(distinct: true)
     @popular = Post.order('num_likes DESC').limit(3)
   end
 
   def show
+    @q = Post.search
     @post = Post.find(params[:id])
     @popular = Post.order('num_likes DESC').limit(3)
     sorted_comments = SortComments.new(PostComment.where(post_id: params[:id]))

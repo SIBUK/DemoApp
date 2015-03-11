@@ -44,3 +44,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'paperclip', '~> 4.2.1'
 gem 'rmagick', '~> 2.13.4'
 gem 'aws-sdk', '< 2.0'
+
+gem 'ransack', '~> 1.6.3'

@@ -4,7 +4,7 @@
 
         <% if post.posttype.to_sym == :text %>
             <div class="post format-standard box">
-              <h2 class="title"><a href="post.html"><%= post.title %></a></h2>
+              <h2 class="title"><%= link_to post.title, post %></h2>
               <% lines = post.body.split(13.chr+10.chr) %>
               <% lines.each do |line|  %>
                   <p><%= line %></p>

@@ -194,6 +194,7 @@ DEPENDENCIES
   paperclip (~> 4.2.1)
   pg (~> 0.18.0.pre20141117110243)
   rails (= 4.1.8)
+  ransack (~> 1.6.3)
   rmagick (~> 2.13.4)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
