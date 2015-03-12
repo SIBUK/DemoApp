@@ -1,8 +1,8 @@
 <div class="blog-wrap">
   <div class="blog-grid">
     <% @posts.each do |post| %>
-
-        <% if post.posttype.to_sym == :text %>
+        <% type = post.posttype.to_sym%>
+        <% if type == :text %>
             <div class="post format-standard box">
               <h2 class="title"><%= link_to post.title, post %></h2>
               <% lines = post.body.split(13.chr+10.chr) %>
@@ -12,7 +12,7 @@
               <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-standard"} %>
             </div>
 
-        <% elsif post.posttype.to_sym == :image %>
+        <% elsif type == :image %>
             <div class="post format-image box">
               <% images = Pic.where(post_id: post.id).limit(1) %>
               <% if images.size > 0 %>
@@ -23,14 +23,14 @@
               <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-image"} %>
             </div>
 
-        <% elsif post.posttype.to_sym == :quote %>
+        <% elsif type == :quote %>
             <div class="post format-quote box">
               <h2 class="title"><%= link_to post.title, post %></h2>
               <blockquote><%= post.body %><cite><%= post.quoteauthor %></cite></blockquote>
               <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-quote"} %>
             </div>
 
-        <% elsif post.posttype.to_sym == :video %>
+        <% elsif type == :video %>
             <div class="post format-video box">
               <div class="video frame">
                 <% url = post.url %>
@@ -44,7 +44,7 @@
               <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-video"} %>
             </div>
 
-        <% elsif post.posttype.to_sym == :music %>
+        <% elsif type == :music %>
             <div class="post format-audio box">
               <h2 class="title"><%= link_to post.title, post %></h2>
               <div class="audio-wrapper">
@@ -73,7 +73,7 @@
               <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-audio"} %>
             </div>
 
-        <% elsif post.posttype.to_sym == :dialogue %>
+        <% elsif type == :dialogue %>
             <% lines = post.body.split(13.chr+10.chr) %>
             <div class="post format-chat box">
               <h2 class="title"><%= link_to post.title, post %></h2>
