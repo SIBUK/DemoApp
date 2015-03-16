@@ -1,16 +1,13 @@
 <div class="post format-quote box">
-
   <% if type == :home %>
       <h2 class="title"><%= link_to post.title, post %></h2>
       <blockquote><%= post.body %><cite><%= post.quoteauthor %></cite></blockquote>
 
   <% elsif type == :partial %>
-      <h2 class="title"><%= link_to post.title, post %></h2>
+      <h2 class="title"><%= post.title %></h2>
       <blockquote><%= post.body %><cite><%= post.quoteauthor %></cite></blockquote>
 
   <% elsif type == :full %>
-      <h2 class="title"><%= link_to post.title, post %></h2>
-      <blockquote><%= post.body %><cite><%= post.quoteauthor %></cite></blockquote>
 
   <% end %>
 

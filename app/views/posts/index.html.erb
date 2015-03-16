@@ -1,9 +1,15 @@
-<h1>Blog Posts</h1>
+<h1>Search Results</h1>
 
-<% @posts.each do |post| %>
-    <h3><%= link_to post.title, post %></h3>
-    <p><%= post.body %></p>
-    <hr>
+<% num_results = @posts.count %>
+<% if num_results > 0 %>
+    <% @posts.each do |post| %>
+        <div class="box">
+          <h3><%= link_to post.title, post %></h3>
+          <p><%= truncate(post.body, length: 1000 ) %></p>
+        </div>
+    <% end %>
+<% else %>
+    <div class="box">
+      <h3>No results found</h3>
+    </div>
 <% end %>
-
-<%= link_to "Create new post", new_post_path %>

@@ -1,79 +1,19 @@
 <div class="blog-wrap">
   <div class="blog-grid">
     <% @posts.each do |post| %>
-        <% type = post.posttype.to_sym%>
-        <% if type == :text %>
-            <div class="post format-standard box">
-              <h2 class="title"><%= link_to post.title, post %></h2>
-              <% lines = post.body.split("\n") %>
-              <% lines.each do |line|  %>
-                  <p><%= line %></p>
-              <% end  %>
-              <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-standard"} %>
-            </div>
-
-        <% elsif type == :image %>
+        <% case post.posttype.to_sym%>
+        <% when :text %>
+            <%= render partial: 'posts/text_post', locals: {post: post, type: :home} %>
+        <% when :image %>
             <%= render partial: 'posts/image_post', locals: {post: post, type: :home} %>
-        <% elsif type == :quote %>
+        <% when :quote %>
             <%= render partial: 'posts/quote_post', locals: {post: post, type: :home} %>
-        <% elsif type == :video %>
-            <div class="post format-video box">
-              <div class="video frame">
-                <% url = post.url %>
-                <% if post.url.include? "www.youtube.com" %>
-                    <% url.sub!('watch?v=', 'embed/') %>
-                <% end %>
-                <iframe src="<%= url %>" width="605" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-              </div>
-              <h2 class="title"><a href="post.html"><%= post.title %></a></h2>
-              <p><%= post.body %></p>
-              <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-video"} %>
-            </div>
-
-        <% elsif type == :music %>
-            <div class="post format-audio box">
-              <h2 class="title"><%= link_to post.title, post %></h2>
-              <div class="audio-wrapper">
-                <div class="vinyl">
-                  <dl>
-                    <% images = Pic.where(post_id: post.id).limit(1) %>
-                    <% if images.size > 0 %>
-                        <% album_cover = image_tag (images[0].image.url(:thumb)), alt: "" %>
-                    <% end %>
-                    <% highlight = image_tag "vinyl.png", alt: "", class: "highlight" %>
-                    <dt class="art">  <%= highlight %><%= album_cover %> </dt>
-                    <dd class="song">
-                      <div class="icon-song"></div>
-                      <%= post.song %></dd>
-                    <dd class="artist">
-                      <div class="icon-artist"></div>
-                      <%= post.artist %></dd>
-                    <dd class="album">
-                      <div class="icon-album"></div>
-                      <%= post.album %></dd>
-                  </dl>
-                </div>
-                <div class="clear"></div>
-                <div class="audio">
-                  <audio controls="" preload="none" src="<%= post.url %>"></audio>
-                </div>
-              </div>
-              <p><%= post.body %></p>
-              <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-audio"} %>
-            </div>
-
-        <% elsif type == :dialogue %>
-            <% lines = post.body.split(13.chr+10.chr) %>
-            <div class="post format-chat box">
-              <h2 class="title"><%= link_to post.title, post %></h2>
-              <ul>
-                <% lines.each do |line|  %>
-                    <% split = line.split( ':', 2 ) %>
-                    <li><strong><%= split[0].to_s + ':' %></strong><%= split[1] unless split[1] == nil %></li>
-                <% end  %>
-              </ul>
-              <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-chat"} %>
-            </div>
+        <% when :video %>
+            <%= render partial: 'posts/video_post', locals: {post: post, type: :home} %>
+        <% when :music %>
+            <%= render partial: 'posts/music_post', locals: {post: post, type: :home} %>
+        <% when :dialogue %>
+            <%= render partial: 'posts/dialogue_post', locals: {post: post, type: :home} %>
         <% end %>
     <% end %>
   </div>

@@ -1,0 +1,21 @@
+<% lines = post.body.split("\n") %>
+<div class="post format-standard box">
+  <% if type == :home %>
+      <h2 class="title"><%= link_to post.title, post %></h2>
+      <% if lines.count > 0 %>
+        <%= truncate(lines[0], length: 800) %>
+      <% end %>
+      <p><%= link_to 'More...', post %></p>
+
+  <% elsif type == :partial %>
+      <h2 class="title"><%= post.title %></h2>
+      <% lines.each do |line|  %>
+          <p><%= line %></p>
+      <% end  %>
+
+  <% elsif type == :full %>
+
+  <% end %>
+
+  <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-standard"} %>
+</div>

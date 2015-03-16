@@ -1,0 +1,38 @@
+<div class="post format-audio box">
+  <% if type == :home %>
+      <h2 class="title"><%= link_to post.title, post %></h2>
+  <% elsif type == :partial %>
+      <h2 class="title"><%= post.title %></h2>
+  <% elsif type == :full %>
+      <h2 class="title"><%= post.title %></h2>
+  <% end %>
+
+  <div class="audio-wrapper">
+    <div class="vinyl">
+      <dl>
+        <% images = Pic.where(post_id: post.id).limit(1) %>
+        <% if images.size > 0 %>
+            <% album_cover = image_tag (images[0].image.url(:thumb)), alt: "" %>
+        <% end %>
+        <% highlight = image_tag "vinyl.png", alt: "", class: "highlight" %>
+        <dt class="art">  <%= highlight %><%= album_cover %> </dt>
+        <dd class="song">
+          <div class="icon-song"></div>
+          <%= post.song %></dd>
+        <dd class="artist">
+          <div class="icon-artist"></div>
+          <%= post.artist %></dd>
+        <dd class="album">
+          <div class="icon-album"></div>
+          <%= post.album %></dd>
+      </dl>
+    </div>
+    <div class="clear"></div>
+    <div class="audio">
+      <audio controls="" preload="none" src="<%= post.url %>"></audio>
+    </div>
+  </div>
+  <p><%= post.body %></p>
+
+  <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-audio"} %>
+</div>

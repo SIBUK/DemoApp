@@ -1,0 +1,27 @@
+<div class="post format-video box">
+  <% if type == :home %>
+      <div class="video frame">
+        <% url = post.url %>
+        <% if post.url.include? "www.youtube.com" %>
+            <% url.sub!('watch?v=', 'embed/') %>
+        <% end %>
+        <iframe src="<%= url %>" width="605" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+      </div>
+      <h2 class="title"><%= link_to post.title, post %></h2>
+      <p><%= post.body %></p>
+  <% elsif type == :partial %>
+      <div class="video frame">
+        <% url = post.url %>
+        <% if post.url.include? "www.youtube.com" %>
+            <% url.sub!('watch?v=', 'embed/') %>
+        <% end %>
+        <iframe src="<%= url %>" width="605" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+      </div>
+      <h2 class="title"><%= post.title %></h2>
+      <p><%= post.body %></p>
+  <% elsif type == :full %>
+
+  <% end %>
+
+  <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-video"} %>
+</div>

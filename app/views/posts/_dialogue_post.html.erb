@@ -1,0 +1,29 @@
+<% lines = post.body.split("\n") %>
+<div class="post format-chat box">
+  <% if type == :home %>
+      <h2 class="title"><%= link_to post.title, post %></h2>
+      <ul>
+        <% lines.each_with_index do |line, count|  %>
+            <% limit_reached = (count >= 2 or line.length > 500) %>
+            <% split = line.split( ':', 2 ) %>
+            <li><strong><%= split[0].to_s + ':' %></strong><%= truncate(split[1], length: 500) unless split[1] == nil %></li>
+            <% break if limit_reached %>
+        <% end  %>
+      </ul>
+      <p><%= link_to 'More...', post %></p>
+
+  <% elsif type == :partial %>
+      <h2 class="title"><%= link_to post.title, post %></h2>
+      <ul>
+        <% lines.each do |line|  %>
+            <% split = line.split( ':', 2 ) %>
+            <li><strong><%= split[0].to_s + ':' %></strong><%= split[1] unless split[1] == nil %></li>
+        <% end  %>
+      </ul>
+
+  <% elsif type == :full %>
+
+  <% end %>
+
+  <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-chat"} %>
+</div>
