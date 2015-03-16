@@ -15,6 +15,7 @@ ActiveAdmin.register Post do
   permit_params :title, :body, :category_id, :posttype, :url, :quoteauthor, :song, :artist, :album, :picture, :image, :pic
 
   index do
+    selectable_column
     column("Title", :title, :sortable => :title)  {|post| link_to "#{post.title}", admin_post_path(post) }
     #column("Email", :email) do |user|
     #  link_to "#{user.email}", "mailto:#{user.name}<#{user.email}>?subject=Enquiry"
