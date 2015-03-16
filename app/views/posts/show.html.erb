@@ -1,1 +1,5 @@
-<%= render partial: 'posts/full_width' %>
+<% if @post.posttype.to_sym == :dialog %>
+    <%= render partial: 'posts/full_width' %>
+<% else %>
+    <%= render partial: 'posts/partial_width' %>
+<% end %>

@@ -5,7 +5,7 @@
         <% if type == :text %>
             <div class="post format-standard box">
               <h2 class="title"><%= link_to post.title, post %></h2>
-              <% lines = post.body.split(13.chr+10.chr) %>
+              <% lines = post.body.split("\n") %>
               <% lines.each do |line|  %>
                   <p><%= line %></p>
               <% end  %>
@@ -13,23 +13,9 @@
             </div>
 
         <% elsif type == :image %>
-            <div class="post format-image box">
-              <% images = Pic.where(post_id: post.id).limit(1) %>
-              <% if images.size > 0 %>
-                  <div class="frame"> <%= link_to (image_tag (images[0].image.url(:small)), alt: ""), post %> </div>
-              <% end %>
-              <h2 class="title"><%= link_to post.title, post %></h2>
-              <p><%= post.body %></p>
-              <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-image"} %>
-            </div>
-
+            <%= render partial: 'posts/image_post', locals: {post: post, type: :home} %>
         <% elsif type == :quote %>
-            <div class="post format-quote box">
-              <h2 class="title"><%= link_to post.title, post %></h2>
-              <blockquote><%= post.body %><cite><%= post.quoteauthor %></cite></blockquote>
-              <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-quote"} %>
-            </div>
-
+            <%= render partial: 'posts/quote_post', locals: {post: post, type: :home} %>
         <% elsif type == :video %>
             <div class="post format-video box">
               <div class="video frame">
@@ -50,9 +36,12 @@
               <div class="audio-wrapper">
                 <div class="vinyl">
                   <dl>
-                    <% img1 = image_tag "vinyl.png",alt: "", class: "highlight" %>
-                    <% img2 = image_tag "art/artwork.png",alt: "" %>
-                    <dt class="art">  <%= img1 %><%= img2 %> </dt>
+                    <% images = Pic.where(post_id: post.id).limit(1) %>
+                    <% if images.size > 0 %>
+                        <% album_cover = image_tag (images[0].image.url(:thumb)), alt: "" %>
+                    <% end %>
+                    <% highlight = image_tag "vinyl.png", alt: "", class: "highlight" %>
+                    <dt class="art">  <%= highlight %><%= album_cover %> </dt>
                     <dd class="song">
                       <div class="icon-song"></div>
                       <%= post.song %></dd>

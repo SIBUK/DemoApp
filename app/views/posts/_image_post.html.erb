@@ -1,0 +1,36 @@
+<% images = Pic.where(post_id: post.id) %>
+<% lines = post.body.split("\n") %>
+<div class="post format-image box">
+
+  <% if type == :home %>
+      <% if images.size > 0 %>
+          <div class="frame"> <%= link_to (image_tag (images[0].image.url(:small)), alt: ""), post %> </div>
+      <% end %>
+      <h2 class="title"><%= link_to post.title, post %></h2>
+      <% if lines.count > 0 %>
+          <p><%= lines[0] %></p>
+      <% end %>
+      <p><%= link_to 'More...', post %></p>
+
+  <% elsif type == :partial %>
+      <h1 class="title"><%= post.title %></h1>
+      <% lines.each_with_index do |line, idx| %>
+          <p><%= line %></p>
+          <% if idx < images.size %>
+              <div class="outer none"><span class="inset"><%= link_to (image_tag (images[idx].image.url(:medium)), alt: ""), images[idx].image.url(:large) %></span></div>
+          <% end %>
+      <% end %>
+
+  <% elsif type == :full %>
+      <h1 class="title"><%= @post.title %></h1>
+      <% lines.each_with_index do |line, idx| %>
+          <% idx += 1 %>
+          <p><%= line %></p>
+          <% if idx < images.size %>
+              <div class="outer none"><span class="inset"><%= link_to (image_tag (images[idx].image.url(:medium)), alt: ""), images[idx].image.url(:large) %></span></div>
+          <% end %>
+      <% end %>
+  <% end %>
+
+  <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-image"} %>
+</div>

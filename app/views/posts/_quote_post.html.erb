@@ -1,0 +1,18 @@
+<div class="post format-quote box">
+
+  <% if type == :home %>
+      <h2 class="title"><%= link_to post.title, post %></h2>
+      <blockquote><%= post.body %><cite><%= post.quoteauthor %></cite></blockquote>
+
+  <% elsif type == :partial %>
+      <h2 class="title"><%= link_to post.title, post %></h2>
+      <blockquote><%= post.body %><cite><%= post.quoteauthor %></cite></blockquote>
+
+  <% elsif type == :full %>
+      <h2 class="title"><%= link_to post.title, post %></h2>
+      <blockquote><%= post.body %><cite><%= post.quoteauthor %></cite></blockquote>
+
+  <% end %>
+
+  <%= render partial: 'home/post_footer', locals: {post: post, icon: "icon-quote"} %>
+</div>

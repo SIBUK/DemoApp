@@ -1,15 +1,18 @@
 <div class="content">
-  <div class="box">
-    <h1 class="title"><%= @post.title %></h1>
-    <% lines = @post.body.split("|") %>
-    <% pics = Pic.where("post_id = ?", @post.id) %>
-    <% lines.each_with_index do |line, idx| %>
-        <p><%= line %></p>
-        <% if idx < pics.size %>
-            <div class="outer none"><span class="inset"><%= link_to (image_tag (pics[idx].image.url(:medium)), alt: ""), pics[idx].image.url(:large) %></span></div>
-        <% end %>
-    <% end %>
-  </div>
+  <% type = @post.posttype.to_sym%>
+  <% if type == :text %>
+      <%= render partial: 'posts/text_post', locals: {post: @post, type: :partial} %>
+  <% elsif type == :image %>
+      <%= render partial: 'posts/image_post', locals: {post: @post, type: :partial} %>
+  <% elsif type == :quote %>
+      <%= render partial: 'posts/quote_post', locals: {post: @post, type: :partial} %>
+  <% elsif type == :video %>
+      <%= render partial: 'posts/video_post', locals: {post: @post, type: :partial} %>
+  <% elsif type == :music %>
+      <%= render partial: 'posts/music_post', locals: {post: @post, type: :partial} %>
+  <% elsif type == :dialogue %>
+      <%= render partial: 'posts/dialogue_post', locals: {post: @post, type: :partial} %>
+  <% end %>
   <div id="comment-wrapper" class="box">
     <div id="comments">
       <h3 id="comments-title"><%= @response %>"<%= @post.title %>"</h3>
