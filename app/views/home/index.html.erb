@@ -19,6 +19,11 @@
   </div>
 </div>
 <div id="navigation">
-  <div class="nav-previous"><a href="#" ><span class="meta-nav-prev">&larr; Older posts</span></a></div>
+  <div class="nav-previous">
+    <span class="meta-nav-prev"><%= link_to '&larr; Older posts'.html_safe, root_path(page: @page+1) %></span>
+  </div>
+  <div class="nav-next">
+    <span class="meta-nav-next"><%= link_to '&rarr; Newer posts'.html_safe, root_path(page: @page-1) %></span>
+  </div>
 </div>
 
