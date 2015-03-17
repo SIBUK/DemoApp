@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Simon's Blog</title>
   <meta charset="UTF-8">
-
-
-
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   <link rel="stylesheet" type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,700,700italic|Open+Sans+Condensed:300,700'>
-
   <%= javascript_include_tag "jquery-1.7.2.min", 'data-turbolinks-track' => true %>
   <%= javascript_include_tag "ddsmoothmenu", 'data-turbolinks-track' => true %>
   <%= javascript_include_tag "retina", 'data-turbolinks-track' => true %>
@@ -23,8 +19,8 @@
   <%= javascript_include_tag "mediaelement.min", 'data-turbolinks-track' => true %>
   <%= javascript_include_tag "mediaelementplayer.min", 'data-turbolinks-track' => true %>
   <%= javascript_include_tag "jquery.dcflickr.1.0", 'data-turbolinks-track' => true %>
-
 </head>
+
 <body>
 <script>$.backstretch("<%= image_url("bg/#{rand(1..9)}.jpg") %>");</script>
 <div class="scanlines"></div>
@@ -34,29 +30,19 @@
     <div id="menu-wrapper">
       <div id="menu" class="menu">
         <ul id="tiny">
-          <li class="active"><%= link_to "Admin", admin_dashboard_path %>
-            <ul>
-              <li><%= link_to "Admin Area", admin_dashboard_path %></li>
-            </ul>
-          </li>
-          <li><%= link_to "Home", root_path %>
+          <li class="active"><%= link_to "Home", root_path %>
             <ul>
               <li><%= link_to "Home", root_path %></li>
             </ul>
           </li>
-          <li><a href="page-with-sidebar.html">Pages</a>
+          <li><%= link_to "Admin", admin_dashboard_path %>
             <ul>
-              <li><a href="page-with-sidebar.html">Page With Sidebar</a></li>
-              <li><a href="full-width.html">Full Width</a></li>
+              <li><%= link_to "Admin Area", admin_dashboard_path %></li>
             </ul>
           </li>
-          <li><a href="typography.html">Styles</a>
-            <ul>
-              <li><a href="typography.html">Typography</a></li>
-              <li><a href="columns.html">Columns</a></li>
-            </ul>
+          <li>
+            <%= link_to "Contact", pages_contact_path %>
           </li>
-          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -64,14 +50,13 @@
   </div>
 </div>
 
-
 <% flash.each do |key, value| %>
     <P><%= value %></P>
 <% end %>
 
 <div class="wrapper">
-  <div class="intro">One must acknowledge the contribution that the kebab has made to this nation.</div>
-  <div class="intro">~ Queen Elizabeth II</div>
+  <div class="intro">When the power of love overcomes the love of power, the world will know peace.</div>
+  <div class="intro">~ William Gladstone (1809-1898)</div>
   <ul class="social">
     <li><a class="rss" href="https://www.rss.com"></a></li>
     <li><a class="facebook" href="https://www.facebook.com"></a></li>

@@ -10,10 +10,7 @@
   <div class="audio-wrapper">
     <div class="vinyl">
       <dl>
-        <% images = Pic.where(post_id: post.id).limit(1) %>
-        <% if images.size > 0 %>
-            <% album_cover = image_tag (images[0].image.url(:thumb)), alt: "" %>
-        <% end %>
+        <% album_cover = image_tag (post.thumbnail.url(:thumb)), alt: "" %>
         <% highlight = image_tag "vinyl.png", alt: "", class: "highlight" %>
         <dt class="art">  <%= highlight %><%= album_cover %> </dt>
         <dd class="song">

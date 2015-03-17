@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   end
 
   def contact
+    @popular = Post.order('num_likes DESC').limit(3)
   end
 
   def resources

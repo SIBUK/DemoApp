@@ -12,11 +12,27 @@ ActiveAdmin.register Post do
   #   permitted << :other if resource.something?
   #   permitted
   # end
-  permit_params :title, :body, :category_id, :posttype, :url, :quoteauthor, :song, :artist, :album, :picture, :image, :pic
+
+
+  permit_params :title, :body, :category_id, :posttype, :url, :quoteauthor, :song, :artist, :album, :thumbnail, :pic
+
+  before_save { |post|
+    if post.posttype.to_sym == :video && post.url
+      video = VideoTools.new(post.url)
+      post.url = video.get_embedded_url
+      thumbnail = video.get_thumbnail
+      if thumbnail
+        post.thumbnail = URI.parse(thumbnail)
+      end
+    end
+  }
 
   index do
     selectable_column
     column("Title", :title, :sortable => :title)  {|post| link_to "#{post.title}", admin_post_path(post) }
+
+    column("Thumbnail", :thumbnail) {|post| link_to(image_tag(post.thumbnail.url(:thumb)), admin_post_path(post))}
+
     #column("Email", :email) do |user|
     #  link_to "#{user.email}", "mailto:#{user.name}<#{user.email}>?subject=Enquiry"
     #end
@@ -34,7 +50,10 @@ ActiveAdmin.register Post do
       row :quoteauthor
       row :song
       row :artist
-      row :album
+
+      row :thumbnail do
+        image_tag(f.thumbnail.url(:thumb))
+      end
 
       table_for f.pics do
         column "Images" do |image|
@@ -57,6 +76,7 @@ ActiveAdmin.register Post do
       f.input :artist
       f.input :album
 
+      f.input :thumbnail, required: false, hint: f.object.thumbnail ? image_tag(f.object.thumbnail.url(:thumb)) : content_tag(:span, "Upload JPG/PNG/GIF image")
 
       #f.has_many :images do |ff|
       #  ff.input :image, as: :file, :hint => ff.template.image_tag(ff.object.image.url(:thumb)), collection: Image.all.map{|w| w.name}, include_blank: false, default: ff.object[:id]

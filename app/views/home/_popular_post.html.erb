@@ -5,6 +5,8 @@
         <% images = Pic.where("post_id = ?", post.id) %>
         <% if images.size > 0 %>
             <div class="frame thumb"> <%= link_to (image_tag (images[0].image.url(:thumb)), alt: ""), post %> </div>
+        <% else %>
+            <div class="frame thumb"> <%= link_to (image_tag (post.thumbnail.url(:thumb)), alt: ""), post %> </div>
         <% end %>
         <div class="meta">
           <h6><%= link_to post.title, post %></h6>

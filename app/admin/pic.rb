@@ -16,6 +16,14 @@ ActiveAdmin.register Pic do
 
   permit_params :name, :image, :post_id
 
+  index do
+    selectable_column
+    column("Title", :title, :sortable => :title)  {|pic| link_to "#{pic.name}", admin_pic_path(pic) }
+    column("Thumbnail", :thumbnail) {|pic| link_to(image_tag(pic.image.url(:thumb)), admin_pic_path(pic))}
+    column("Created", :created_at)
+    actions
+  end
+
   show do |f|
     attributes_table do
       row :name
