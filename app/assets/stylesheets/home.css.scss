@@ -1030,13 +1030,16 @@ blockquote cite:before {
 /* =Audio
 ----------------------------------------------- */
 .audio-wrapper {
-  width: 595px;
+  width: 100%;
   position: relative;
   margin-bottom: 20px;
 }
+audio {
+  width: 100%;
+}
 .audio {
-  width: 440px;
   position: absolute;
+  left: 155px;
   right: 0;
   top: 3px;
 }
