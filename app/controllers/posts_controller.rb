@@ -59,4 +59,9 @@ class PostsController < ApplicationController
     @post.like
   end
 
+  def reply
+    @comment = PostComment.find(params[:id])
+    aaa = 0
+  end
+
 end

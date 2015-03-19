@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   match 'contact' => 'pages#contact', :via => [:get]
 
   get '/posts/:id/like' => 'posts#like', as: 'like_post'
+  get '/posts/:id/reply' => 'posts#reply', as: 'reply_post'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

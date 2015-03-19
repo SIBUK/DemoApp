@@ -996,16 +996,7 @@ ul.single-gallery li .frame {
 }
 /* =Quote
 ----------------------------------------------- */
-blockquote {
-  margin: 0 0 20px 0;
-  font-size: 16px;
-  line-height: 25px;
-  font-weight: 300;
-  background-image: asset-data-url("quote.png");
-  background-repeat: no-repeat;
-  background-position: right top;
-  font-style: italic;
-}
+
 .post.format-quote blockquote {
   background: none
 }
@@ -2665,3 +2656,26 @@ input {
   font-size: 10px;
 }
 /* End: SourceChooser */
+.comment-indent
+ {
+   margin-left: 40px;
+ }
+
+
+
+.blockquote-quote {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 300;
+  background-image: asset-data-url("quote.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  font-style: italic;
+
+}
+
+blockquote.aaaaa
+{
+  margin: 0 0 20px 0;
+}
