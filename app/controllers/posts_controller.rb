@@ -65,4 +65,9 @@ class PostsController < ApplicationController
     @post_comment = PostComment.new(post: @post)
   end
 
+  def submit
+    PostComment.create(params)
+
+  end
+
 end

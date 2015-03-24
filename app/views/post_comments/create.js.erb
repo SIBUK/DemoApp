@@ -1,0 +1,2 @@
+<%= aaaa = 9 %>
+$("#comments-title").append("<%= escape_javascript(render partial: 'post_comments/comment', locals: {comment: @post_comment, indent: 0, reply: true}).html_safe %>").hide().slideDown()

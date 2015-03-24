@@ -3,7 +3,7 @@
   <div id="respond">
     <h3 id="reply-title">Leave a Reply</h3>
     <p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>
-    <%= form_for comment, id: "commentform" do |f| %>
+    <%= form_for comment, id: "commentform", remote: true do |f| %>
         <%= f.hidden_field :post_id, value: post_id %>
         <%= f.hidden_field :post_comment_id, value: comment_id %>
         <p class="comment-form-author">

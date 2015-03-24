@@ -17,11 +17,12 @@ class PostCommentsController < ApplicationController
     @post_comment = PostComment.new(post_comment_params)
     if @post_comment.save
       flash[:notice] = 'Comment successfully created'
-      redirect_to(@post_comment.post)
+      #redirect_to(@post_comment.post)
     else
       flash[:notice] = 'Error creating comment'
-      redirect_to(@post_comment.post)
+      #redirect_to(@post_comment.post)
     end
+    return @post_comment
   end
 
   def index
