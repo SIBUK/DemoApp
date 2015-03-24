@@ -1,2 +1,18 @@
-$("#com<%=@comment.id %>").append("<%= escape_javascript(render partial: 'post_comments/new_comment', locals: {comment: @comment, post_id: @comment.post_id, comment_id: @comment.id}).html_safe %>")
+var slideSpeed = 400;
 
+var current = $("#com<%=@comment_id %>").find("#testid");
+var id = $("#testid");
+
+if (id.length > 0)
+{
+    id.slideUp( slideSpeed, function() {
+        $(this).remove();
+    });
+}
+
+if (current.length === 0)
+{
+    $("#com<%=@comment_id %>").append("<%= escape_javascript(render partial: 'post_comments/new_comment', locals: {comment: @post_comment, post_id: @post.id, comment_id: @comment_id}).html_safe %>");
+    $("#com<%=@comment_id %>").find(".comment-form").attr('id', 'testid');
+    $("#com<%=@comment_id %>").find("#testid").hide().slideDown(slideSpeed);
+}

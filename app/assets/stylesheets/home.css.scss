@@ -1188,7 +1188,7 @@ audio {
   color: #b9b9b9;
 }
 #comments .edit-link {
-  margin-bottom: 20px;
+  height: 20px;
   display: block;
 }
 #comments a:hover {
@@ -1207,7 +1207,7 @@ a#cancel-comment-reply-link {
   font-weight: bold;
 }
 .commentlist #respond {
-  margin: 30px 0 0 0
+  margin: 0
 }
 #commentform p.form-submit {
   margin: 0
@@ -2661,8 +2661,6 @@ input {
    margin-left: 40px;
  }
 
-
-
 .blockquote-quote {
   margin: 0 0 20px 0;
   font-size: 16px;
@@ -2672,10 +2670,22 @@ input {
   background-repeat: no-repeat;
   background-position: right top;
   font-style: italic;
-
 }
 
-blockquote.aaaaa
+blockquote.margin
 {
   margin: 0 0 20px 0;
 }
+
+.zero-height
+{
+  margin: 0;
+  height: 0%;
+}
+
+.line {
+  margin-top: 8px;
+  padding-top: 8px;
+  background: transparent asset-data-url("line.png") repeat-x left top;
+}
+

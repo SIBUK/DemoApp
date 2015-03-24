@@ -22,7 +22,7 @@ private
 
   def initialize(comments)
     # Instance variables
-    @comments = comments.order(created_at: :asc)
+    @comments = comments.order(created_at: :desc).to_a
     @sorted = []     # Stores the sorted comments
     @depth = 0       # recursion depth
     @max_indent = 10 # The max number of levels to indent comments within the view (for aesthetic purposes)
@@ -32,8 +32,8 @@ private
 public
   # The main recursive function that sorts the comments
   def sort_comments(post_comment_id = nil)
-    com = @comments
-    @comments = @comments.where.not(post_comment_id: post_comment_id) # make a copy of all remaining comments then remove all the ones that are not in reponse to the comment that has been replied to (or nil if this is the root)
+    com = @comments.dup
+    @comments.delete_if{ |post| post.post_comment_id == post_comment_id } # where.not(post_comment_id: post_comment_id) # make a copy of all remaining comments then remove all the ones that are not in response to the comment that has been replied to (or nil if this is the root)
 
     com.each do |comment|
       if comment.post_comment_id == post_comment_id   # if this comment is in reply to the previous comment then add it to the array
@@ -44,9 +44,14 @@ public
       end
       @depth += 1
 
-      sub_comments = if comment.post_comment_id != post_comment_id    # Get all replies to this comment (if any)
-                       @comments.where(post_comment_id: comment.post_comment_id)
-                     end
+      #sub_comments = if comment.post_comment_id != post_comment_id    # Get all replies to this comment (if any)
+      #                 @comments.where(post_comment_id: comment.id)
+      #               end
+
+      #sub_comments = @comments.where(post_comment_id: comment.id)
+      sub_comments = @comments.select {
+        |v| v[:post_comment_id] == comment.id
+      }
 
       if sub_comments
         sub_comments.each do |sub_comment|

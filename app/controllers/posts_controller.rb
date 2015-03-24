@@ -60,8 +60,9 @@ class PostsController < ApplicationController
   end
 
   def reply
-    @comment = PostComment.find(params[:id])
-    aaa = 0
+    @post = Post.find(params[:id])
+    @comment_id = params[:comment_id]
+    @post_comment = PostComment.new(post: @post)
   end
 
 end
