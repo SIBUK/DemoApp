@@ -61,13 +61,7 @@ class PostsController < ApplicationController
 
   def reply
     @post = Post.find(params[:id])
-    @comment_id = params[:comment_id]
     @post_comment = PostComment.new(post: @post)
+    @post_comment.post_comment_id = params[:comment_id]
   end
-
-  def submit
-    PostComment.create(params)
-
-  end
-
 end

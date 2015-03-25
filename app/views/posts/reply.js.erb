@@ -1,6 +1,6 @@
 var slideSpeed = 400;
-
-var current = $("#com<%=@comment_id %>").find("#testid");
+var selector = $("#com<%= @post_comment.post_comment_id %>");
+var current = selector.find("#testid");
 var id = $("#testid");
 
 if (id.length > 0)
@@ -12,7 +12,7 @@ if (id.length > 0)
 
 if (current.length === 0)
 {
-    $("#com<%=@comment_id %>").append("<%= escape_javascript(render partial: 'post_comments/new_comment', locals: {comment: @post_comment, post_id: @post.id, comment_id: @comment_id}).html_safe %>");
-    $("#com<%=@comment_id %>").find(".comment-form").attr('id', 'testid');
-    $("#com<%=@comment_id %>").find("#testid").hide().slideDown(slideSpeed);
+    selector.append("<%= escape_javascript(render partial: 'post_comments/new_comment', locals: {comment: @post_comment, post_id: @post.id, comment_id: @post_comment.post_comment_id}).html_safe %>");
+    selector.find(".comment-form").attr('id', 'testid');
+    selector.find("#testid").hide().slideDown(slideSpeed);
 }

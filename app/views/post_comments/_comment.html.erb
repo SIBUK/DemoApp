@@ -4,9 +4,7 @@
 <blockquote class="margin">
   <div class="comment-author vcard user frame"> <%= image_tag "avatar.jpg", alt: "", class: "avatar avatar-70 photo", width: 70, height: 70 %> </div>
   <div class="message" id="<%= "com"+comment.id.to_s %>">
-    <% if reply == false %>
-        <span class="reply-link"><%= link_to 'Reply', reply_post_path(comment_id: comment.id), class: "comment-reply-link", remote: true %></span>
-    <% end %>
+    <span class="reply-link"><%= link_to 'Reply', reply_post_path(id: comment.post_id, comment_id: comment.id), class: "comment-reply-link", remote: true %></span>
     <div class="info">
       <h2><%= comment.name %></h2>
       <span class="meta"><%= comment.created_at.strftime("%A #{comment.created_at.day.ordinalize} %B, %Y at %l:%M %P") %></span> </div>

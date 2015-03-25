@@ -17,7 +17,7 @@
     <div id="comments">
       <h3 id="comments-title"><%= @response %>"<%= @post.title %>"</h3>
       <% @comments.each do |comment| %>
-          <%= render partial: 'post_comments/comment', locals: {comment: comment.comment, indent: comment.indent, reply: false} %>
+          <%= render partial: 'post_comments/comment', locals: {comment: comment.comment, indent: comment.indent} %>
       <% end %>
     </div>
     <%= render partial: 'post_comments/new_comment', locals: {comment: @post_comment, post_id: @post.id, comment_id: nil} %>
