@@ -1,7 +1,7 @@
 var slideSpeed = 400;
-var selector = $("#com<%= @post_comment.post_comment_id %>");
-var current = selector.find("#testid");
-var id = $("#testid");
+var selector = $("#reply-tag<%= @post_comment.post_comment_id %>");
+var current = selector.find("#attachment");
+var id = $("#attachment");
 
 if (id.length > 0)
 {
@@ -13,6 +13,6 @@ if (id.length > 0)
 if (current.length === 0)
 {
     selector.append("<%= escape_javascript(render partial: 'post_comments/new_comment', locals: {comment: @post_comment, post_id: @post.id, comment_id: @post_comment.post_comment_id}).html_safe %>");
-    selector.find(".comment-form").attr('id', 'testid');
-    selector.find("#testid").hide().slideDown(slideSpeed);
+    selector.find(".comment-form").attr('id', 'attachment');
+    selector.find("#attachment").hide().slideDown(slideSpeed);
 }

@@ -4,9 +4,9 @@
 <% end %>
 <% nodes.each do |node| %>
     <% comment = node.comment %>
-    <blockquote class="margin" id="<%= "com"+comment.id.to_s %>">
+    <blockquote class="margin" id="<%= "fade-tag"+comment.id.to_s %>">
       <div class="comment-author vcard user frame"> <%= image_tag "avatar.jpg", alt: "", class: "avatar avatar-70 photo", width: 70, height: 70 %> </div>
-      <div class="message" >
+      <div class="message" id="<%= "reply-tag"+comment.id.to_s %>">
         <span class="reply-link"><%= link_to 'Reply', reply_post_path(id: comment.post_id, comment_id: comment.id), class: "comment-reply-link", remote: true %></span>
         <div class="info">
           <h2><%= comment.name %></h2>
@@ -18,7 +18,7 @@
       <div class="clear"></div>
       <div class="clear"></div>
     </blockquote>
-    <div id="<%= "tag"+comment.id.to_s %>"></div>
+    <div id="<%= "new-tag"+comment.id.to_s %>"></div>
     <% if node.nodes.count > 0 %>
         <%= render partial: 'post_comments/comment', locals: {node: node, indent: true} %>
     <% end %>
