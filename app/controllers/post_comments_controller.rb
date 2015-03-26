@@ -14,15 +14,18 @@ class PostCommentsController < ApplicationController
   end
 
   def create
-    @post_comment = PostComment.new(post_comment_params)
-    if @post_comment.save
+    post_comment = PostComment.new(post_comment_params)
+    if post_comment.save
       flash[:notice] = 'Comment successfully created'
-      #redirect_to(@post_comment.post)
+      # We have to get a bit funky here now and create a node in a way that works correctly the the _comment views recursive functionality
+      @post_node = CommentNode.new(nil)
+      @post_node.nodes.push( CommentNode.new(post_comment) )
     else
       flash[:notice] = 'Error creating comment'
-      #redirect_to(@post_comment.post)
     end
-    return @post_comment
+    @new_id = post_comment.id
+    @id = post_comment.post_comment_id
+    return @post_node
   end
 
   def index

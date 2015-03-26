@@ -1,71 +1,45 @@
 # As replies are made to previously posted comments they get saved to the database in a way that means they are not
 # ordered suitably for them to be easily displayed on the screen. They end up ad-hoc. This class re-arranges
-# them and stores them in an array in the order that they should be displayed. It does this by checking if a comment is
-# in reply to another comment and if so then it will recurse and deal with all the comments that are in reply to that
-# comment before continuing. After recursing it will then deal with all comments that are in response to the same comment
-# before returning and continuing where it left off. If there is a 'reply to a reply' then it will recurse again until
-# all the comments are sorted.
-# It will also set an 'indent' value which is used by the view to suitably position the comment indented from the left.
-# Setting '@max_indent' will limit how many times a comment can be indented (to prevent them all getting squashed up
-# on the right hand side of the screen after several 'replies to replies')
+# them in to a Binary Tree which can be recursed through easily when required.
+# Comments that are made in reply to other comments are added to the tree as new nodes
+
+# This class acts as a node on the tree
+class CommentNode
+  attr_accessor :comment, :nodes
+  def initialize(comment)
+    @nodes = []         # Holds an array of other nodes
+    @comment = comment  # Stores this node's comment
+  end
+end
 
 class SortComments
-private
-  # Small data structure for use by the SortComments class
-  class CommentNode
-    attr_accessor :comment, :indent
-    def initialize(comment)
-      @comment = comment
-      @indent = 0
-    end
-  end
-
+  private
   def initialize(comments)
     # Instance variables
     @comments = comments.order(created_at: :desc).to_a
-    @sorted = []     # Stores the sorted comments
-    @depth = 0       # recursion depth
-    @max_indent = 10 # The max number of levels to indent comments within the view (for aesthetic purposes)
-    @responses = 0   # tracks the number of comments that are just in response to the actual post and ignores ones that are in response to other comments
+    @root_node = []  # Stores the sorted comments
+    @responses = 0   # keeps count of the number of comments that are just in response to the actual post and ignores ones that are in response to other comments
   end
 
-public
-  # The main recursive function that sorts the comments
-  def sort_comments(sub_comment_id = nil)
-    com = @comments.select{ |post| post.post_comment_id == sub_comment_id}
-
-    com.each do |comment|
-      @depth += 1
-
-      sub_comments = @comments.select {|sub| sub[:post_comment_id] == comment.id}
-
-      if sub_comments
-        sub_comments.each do |sub_comment|
-          sort_comments(sub_comment.post_comment_id)                  # and if there are replies to this comment, then recurse
-        end
-      end
-
-      @depth -= 1
-
-      if comment.post_comment_id == sub_comment_id   # if this comment is in reply to the previous comment then add it to the array
-        node = CommentNode.new(comment)
-        node.indent = @depth > @max_indent ? @max_indent : @depth
-        @sorted.unshift(node)
-        @responses += 1 unless @depth > 0
-        @comments.delete(comment)
-      end
+# Add new nodes to the tree
+  def add_nodes(node, id)
+    comments, @comments = @comments.partition{|sub| sub[:post_comment_id] == id}
+    if !id; @responses = comments.count end
+    comments.each do |comment|
+      new_node = CommentNode.new(comment)
+      node.nodes.push(new_node)
+      add_nodes(new_node, comment.id)
     end
-    return @sorted
   end
 
-  # Get the sorted comments
-  def get_comments
-    return @sorted
-  end
+  public
 
-  # Set the level on indentation
-  def set_maximum_indent(number_of_indents)
-    @max_indent = number_of_indents
+  # Begin creating the Binary Tree of comments and return it once finished
+  def sort_comments()
+    # create the root node of the Binary Tree
+    @root_node = CommentNode.new(nil)
+    add_nodes(@root_node, nil)
+    return @root_node
   end
 
   # A helper for the view to get the text with number of comments properly pluralised
@@ -79,8 +53,4 @@ public
     end
   end
 
-  # Get the total number of comments left
-  def get_total_num_comments
-    return @sorted.count
-  end
 end

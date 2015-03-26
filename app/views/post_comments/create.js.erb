@@ -1,13 +1,14 @@
-<% if @post_comment.post_comment_id %>
-    var selector = $("#com<%= @post_comment.post_comment_id %>");
+<% if @id %>
+    var selector = $("#tag<%= @id %>");
     var id = $("#testid");
     if (id.length > 0)
     {
         id.slideUp( 400, function() {
             $(this).remove();
-            selector.append("<%= escape_javascript(render partial: 'post_comments/comment', locals: {comment: @post_comment, indent: 1}).html_safe %>").hide().slideDown(400);
+            selector.append("<%= escape_javascript(render partial: 'post_comments/comment', locals: {node: @post_node, indent: true}).html_safe %>").hide().slideDown(400);
         });
     }
 <% else %>
-    $("#comments").append("<%= escape_javascript(render partial: 'post_comments/comment', locals: {comment: @post_comment, indent: 0}).html_safe %>").hide().slideDown(400);
+    $("#comments").append("<%= escape_javascript(render partial: 'post_comments/comment', locals: {node: @post_node, indent: false}).html_safe %>")
+    $("#com<%= @new_id %>").hide().fadeIn(400)
 <% end %>
