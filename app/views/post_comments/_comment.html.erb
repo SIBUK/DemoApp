@@ -1,7 +1,5 @@
 <% nodes = node.nodes %>
-<% if indent == true %>
-    <blockquote class="comment-indent children">
-<% end %>
+<% if indent == true %><blockquote class="comment-indent children"><% end %>
 <% nodes.each do |node| %>
     <% comment = node.comment %>
     <blockquote class="margin" id="<%= "fade-tag"+comment.id.to_s %>">
@@ -10,19 +8,23 @@
         <span class="reply-link"><%= link_to 'Reply', reply_post_path(id: comment.post_id, comment_id: comment.id), class: "comment-reply-link", remote: true %></span>
         <div class="info">
           <h2><%= comment.name %></h2>
-          <span class="meta"><%= comment.created_at.strftime("%A #{comment.created_at.day.ordinalize} %B, %Y at %l:%M %P") %></span> </div>
+          <% date = comment.created_at.strftime("%A #{comment.created_at.day.ordinalize} %B, %Y at %l:%M %P") %>
+          <% if reply %>
+              <span class="meta">Reply to <%= reply %>, posted by <%= comment.name %> on <%= date %></span>
+          <% else %>
+              <span class="meta">Posted by <%= comment.name %> on <%= date %></span>
+          <% end %>
+        </div>
         <div class="comment-body ">
           <p><%= comment.body %></p>
         </div>
-        <span class="edit-link"></span> </div>
-      <div class="clear"></div>
-      <div class="clear"></div>
+        <span class="edit-link"></span>
+      </div>
     </blockquote>
     <div id="<%= "new-tag"+comment.id.to_s %>"></div>
     <% if node.nodes.count > 0 %>
-        <%= render partial: 'post_comments/comment', locals: {node: node, indent: true} %>
+        <%= render partial: 'post_comments/comment', locals: {node: node, indent: true, reply: node.comment.name } %>
     <% end %>
 <% end %>
-<% if indent == true %>
-    </blockquote>
-<% end %>
+<% if indent == true %></blockquote><% end %>
+

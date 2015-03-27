@@ -11,7 +11,7 @@
   <div id="comment-wrapper" class="box">
     <div id="comments">
       <h3 id="comments-title"><%= @response %>"<%= @post.title %>"</h3>
-      <%= render partial: 'post_comments/comment', locals: {node: @comments, indent: false} %>
+      <%= render partial: 'post_comments/comment', locals: {node: @comments, indent: false, reply: nil} %>
     </div>
     <%= render partial: 'post_comments/new_comment', locals: {comment: @post_comment, post_id: @post.id, comment_id: nil} %>
   </div>
