@@ -29,9 +29,10 @@ Rails.application.routes.draw do
   resources :categories
   resources :pics
 
-  match 'about' => 'pages#about', :via => [:get]
-  match 'resources' => 'pages#resources', :via => [:get]
-  match 'contact' => 'pages#contact', :via => [:get]
+  match 'about' => 'pages#about', via: 'get'
+  match 'resources' => 'pages#resources', via: 'get'
+  match 'contact' => 'pages#contact', via: 'get'
+  match 'contacts', to: 'pages#send_contact_email',via: 'post'
 
   get '/posts/:id/like' => 'posts#like', as: 'like_post'
   get '/posts/:id/reply' => 'posts#reply', as: 'reply_post'

@@ -36,7 +36,15 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   #Paperclip.options[:command_path] = 'C:\RailsInstaller\DevKit\bin'
 
-  config.action_mailer.default_url_options = { :host => "localhost:3000" }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address:              'smtp.gmail.com',
+      port:                 587,
+      domain:               'example.com',
+      user_name:            ENV['CONTACT_EMAIL_USER'],
+      password:             ENV['CONTACT_EMAIL_PASS'],
+      authentication:       'plain',
+      enable_starttls_auto: true  }
 
-  autoload :SortComments, Rails.application.config.root + "/app/classes/sort_comments.rb"
 end

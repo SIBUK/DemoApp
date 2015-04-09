@@ -1,0 +1,5 @@
+$("#comment-hide-me").slideUp( 600, function() {
+    $(this).remove();
+    $('.content').append("<%= escape_javascript(render partial: 'pages/thankyou').html_safe %>");
+    $('#feedback-thanks').hide().slideDown(200)
+});

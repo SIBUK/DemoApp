@@ -172,7 +172,7 @@ a.more {
   line-height: 1;
 }
 a.button,
-.forms fieldset .btn-submit,
+.new_contact fieldset .btn-submit,
 #commentform input#submit,
 #new_post_comment input#submit,{
   font-family: 'Open Sans Condensed', sans-serif;
@@ -1243,15 +1243,16 @@ li.post.pingback p {
 .forms li.hidden-row {
   display: none
 }
-.forms fieldset .text-input,
-.forms fieldset .text-area,
+
+.new_contact fieldset .text-input,
+.new_contact fieldset .text-area,
 #commentform input,
 #new_post_comment input,
 #commentform textarea {
   padding: 7px 10px;
   height: 35px;
 }
-.forms fieldset .text-area,
+.new_contact fieldset .text-area,
 #commentform textarea {
   min-height: 200px;
   padding: 10px;
