@@ -1,11 +1,11 @@
 class ContactMailer < ActionMailer::Base
-  default from: "contact@mydemoblog.com"
+  default from: "mydemoapp-env.elasticbeanstalk.com"
 
   def contact_email(form_info)
     @name = form_info[:name]
     @message = form_info[:message]
     @from = form_info[:email]
     @subject = form_info[:subject]
-    mail(to: 'simon.bailey@mobica.com', from: @from, subject: @subject)
+    mail(to: ENV['CONTACT_EMAIL'], from: @from, subject: @subject)
   end
 end
