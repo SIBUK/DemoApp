@@ -37,7 +37,5 @@ class PostCommentsController < ApplicationController
     @post_comment = PostComment.find(params[:id])
     new
   end
-
-
 end
 

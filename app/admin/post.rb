@@ -1,5 +1,5 @@
 ActiveAdmin.register Post do
-
+  menu priority: 3
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -30,12 +30,7 @@ ActiveAdmin.register Post do
   index do
     selectable_column
     column("Title", :title, :sortable => :title)  {|post| link_to "#{post.title}", admin_post_path(post) }
-
     column("Thumbnail", :thumbnail) {|post| link_to(image_tag(post.thumbnail.url(:thumb)), admin_post_path(post))}
-
-    #column("Email", :email) do |user|
-    #  link_to "#{user.email}", "mailto:#{user.name}<#{user.email}>?subject=Enquiry"
-    #end
     column("Created", :created_at)
     actions
   end
@@ -77,20 +72,7 @@ ActiveAdmin.register Post do
       f.input :album
 
       f.input :thumbnail, required: false, hint: f.object.thumbnail ? image_tag(f.object.thumbnail.url(:thumb)) : content_tag(:span, "Upload JPG/PNG/GIF image")
-
-      #f.has_many :images do |ff|
-      #  ff.input :image, as: :file, :hint => ff.template.image_tag(ff.object.image.url(:thumb)), collection: Image.all.map{|w| w.name}, include_blank: false, default: ff.object[:id]
-      #  ff.input :_destroy, as: :boolean
-      #end
-      #f.input :image, required: false, as: :select, hint: image_tag(f.object.image.url(:thumb))
-      #f.input :image, :as => :select, collection: :images
-      #f.input :image
     end
-
-
-
-
-
 
     f.actions
   end
